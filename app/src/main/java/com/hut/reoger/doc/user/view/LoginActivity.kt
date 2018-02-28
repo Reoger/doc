@@ -2,12 +2,11 @@ package com.hut.reoger.doc.user.view
 
 import android.os.Bundle
 
-import com.example.cm.mytestdemo.R
 import com.example.cm.mytestdemo.base.BaseActivity
+import com.hut.reoger.doc.R
 import com.hut.reoger.doc.home.view.HomeActivity
 import com.hut.reoger.doc.user.presener.ILoginPresenter
 import com.hut.reoger.doc.user.presener.LoginPresenter
-import com.hut.reoger.doc.user.view.ILoginView
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**

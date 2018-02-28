@@ -1,6 +1,7 @@
 package com.hut.reoger.doc
 
 import android.app.Application
+import com.hut.reoger.doc.utils.netWork.ApiClient
 
 /**
  * Created by reoger on 2018/2/25.

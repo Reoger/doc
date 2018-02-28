@@ -1,12 +1,12 @@
 package com.hut.reoger.doc.user.view
 
 import android.os.Bundle
-import com.example.cm.mytestdemo.R
 import com.example.cm.mytestdemo.base.BaseActivity
+import com.hut.reoger.doc.R
 import com.hut.reoger.doc.user.model.RegisterData
 import com.hut.reoger.doc.user.model.RegisterInfo
 import com.hut.reoger.doc.user.presener.IRegisterPresenter
-import com.example.cm.mytestdemo.user.presener.RegisterPresenter
+import com.hut.reoger.doc.user.presener.RegisterPresenter
 import com.hut.reoger.doc.user.view.IRegisterView
 import com.hut.reoger.doc.utils.netWork.ApiErrorModel
 import kotlinx.android.synthetic.main.activity_register.*
