@@ -1,5 +1,6 @@
 package com.hut.reoger.doc.home.view
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -9,6 +10,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.hut.reoger.doc.R
+import com.hut.reoger.doc.read.DocumentReaderActivity
+import com.hut.reoger.doc.read.TestActivity2
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import kotlinx.android.synthetic.main.activity_content.*
 import kotlinx.android.synthetic.main.activity_home.*
@@ -35,10 +38,11 @@ class HomeActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSelect
         Log.d("debug","这撒大声地的吗")
         when(item.itemId){
             R.id.nav_camera->{
+                startActivity(Intent(this,TestActivity2::class.java))
 
             }
             R.id.nav_gallery->{
-
+                startActivity(Intent(this,DocumentReaderActivity::class.java))
             }
             R.id.nav_slideshow->{
 
