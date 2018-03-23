@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <EditText
+        android:id="@+id/et_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:hint="say what you want to say"/>
+
+
+    <EditText
+        android:id="@+id/ed_links"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="pleas leave you message to help us find you"/>
+
+    <Button
+        android:text="hello"
+        android:id="@+id/btu_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

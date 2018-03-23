@@ -32,7 +32,7 @@ import com.zhy.view.flowlayout.TagFlowLayout
 class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListener, IHomeFragmentView {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun loadSuccessful(data: String) {
-        openActivity(SearchResultActivity::class.java,"test",data)
+        openActivity(SearchResultActivity::class.java,"search",data)
     }
 
     var presenter: IHomeFragmentPresenter?= null

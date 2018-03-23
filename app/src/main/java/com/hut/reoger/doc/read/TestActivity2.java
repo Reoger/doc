@@ -221,7 +221,6 @@ public class TestActivity2 extends AppCompatActivity {
             return str;
         }
 
-
         str = paramString.substring(i + 1);
         TLog.d(TAG, "paramString.substring(i + 1)------>" + str);
         return str;

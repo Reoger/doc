@@ -9,9 +9,13 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.hut.reoger.doc.App
 import com.hut.reoger.doc.R
+import com.hut.reoger.doc.feedback.view.FeedBackActivity
 import com.hut.reoger.doc.read.DocumentReaderActivity
 import com.hut.reoger.doc.read.TestActivity2
+import com.hut.reoger.doc.settings.view.SettingsActivity
+import com.hut.reoger.doc.utils.log.TLog
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import kotlinx.android.synthetic.main.activity_content.*
 import kotlinx.android.synthetic.main.activity_home.*
@@ -37,15 +41,22 @@ class HomeActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSelect
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         Log.d("debug","这撒大声地的吗")
         when(item.itemId){
-            R.id.nav_camera->{
-                startActivity(Intent(this,TestActivity2::class.java))
+            R.id.nav_person->{
+//                startActivity(Intent(this,TestActivity2::class.java))
 
+                App.instance.showDialog(this)
             }
-            R.id.nav_gallery->{
+            R.id.nav_history->{
                 startActivity(Intent(this,DocumentReaderActivity::class.java))
             }
-            R.id.nav_slideshow->{
-
+            R.id.nav_about->{
+                startActivity(Intent(this,SettingsActivity::class.java))
+            }
+            R.id.nav_share->{
+                TLog.d("T"+1/0+"T")
+            }
+            R.id.nav_feedfack->{
+                startActivity(Intent(this,FeedBackActivity::class.java))
             }
             else ->{
 

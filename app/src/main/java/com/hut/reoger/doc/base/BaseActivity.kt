@@ -25,6 +25,9 @@ import com.hut.reoger.doc.R
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import kotlinx.android.synthetic.main.activity_base.*
+import com.hut.reoger.doc.utils.loadingUtils.SlidingInAndOutDialogFragment
+
+
 
 
 /**
@@ -217,6 +220,24 @@ abstract class BaseActivity : RxAppCompatActivity() {
 
     fun log(str: String){
         Log.d(TAG,str)
+    }
+
+
+    fun  showDialog() {
+        // DialogFragment.show() will take care of adding the fragment
+        // in a transaction.  We also want to remove any currently showing
+        // dialog, so make our own transaction and take care of that here.
+        val ft = fragmentManager.beginTransaction()
+        val prev = fragmentManager.findFragmentByTag("dialog")
+        if (prev != null) {
+            ft.remove(prev)
+        }
+        ft.addToBackStack(null)
+        //      ft.setCustomAnimations(R.anim.fragment_slide_left_enter, 0);
+
+        // Create and show the dialog.
+        val newFragment = SlidingInAndOutDialogFragment()
+        newFragment.show(ft, "dialog")
     }
 
 

@@ -31,6 +31,7 @@ class SuperFileView2 @JvmOverloads constructor(context: Context, attrs: Attribut
 
     fun setOnGetFilePathListener(mOnGetFilePathListener: OnGetFilePathListener) {
         this.mOnGetFilePathListener = mOnGetFilePathListener
+
     }
 
 

@@ -6,11 +6,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.example.cm.mytestdemo.base.BaseActivity
 import com.hut.reoger.doc.R
-import com.hut.reoger.doc.home.model.Match
-import com.hut.reoger.doc.home.model.Query
 import com.hut.reoger.doc.home.model.ResultBySearchContent
-import com.hut.reoger.doc.home.model.SearchByContentBean
 import com.hut.reoger.doc.search.adapter.SearchResultAdapter
+import com.hut.reoger.doc.search.bean.Match
+import com.hut.reoger.doc.search.bean.Query
+import com.hut.reoger.doc.search.bean.SearchByContent
 import com.hut.reoger.doc.utils.netWork.ApiClient
 import com.hut.reoger.doc.utils.netWork.ApiErrorModel
 import com.hut.reoger.doc.utils.netWork.ApiResponse
@@ -38,10 +38,10 @@ class SearchResultActivity : BaseActivity() {
         val adapter = SearchResultAdapter(this)
         recycler_search_result.adapter = adapter
         recycler_search_result.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val data = intent.getStringExtra("test")
+        val data = intent.getStringExtra("search")
         tv_search.text = data
 
-        ApiClient.instance.service.searchByContent(SearchByContentBean(0, 10, Query(Match(data))))
+        ApiClient.instance.service.searchByContent(SearchByContent(0, 10, Query(Match(data)),listOf("name","integer","time","organization")))
                 .compose(NetworkScheduler.compose())
                 .subscribe(object : ApiResponse<ResultBySearchContent>(context = this) {
                     override fun success(data: ResultBySearchContent) {

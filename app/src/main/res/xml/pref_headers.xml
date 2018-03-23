@@ -1,0 +1,40 @@
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <header
+        android:fragment="com.hut.reoger.doc.settings.view.SettingsActivity$AccountPreferenceFragment"
+        android:icon="@drawable/ic_sync_black_24dp"
+        android:title="@string/pref_header_account"
+        />
+
+    <header
+        android:fragment="com.hut.reoger.doc.settings.view.SettingsActivity$NotificationPreferenceFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/pref_header_notifications" />
+
+
+    <header
+        android:fragment="com.hut.reoger.doc.settings.view.SettingsActivity$CheckUpdatePreferenceFragment"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/pref_header_check_update"
+        />
+
+
+    <header
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/pref_header_about"
+        />
+
+    <header
+        android:fragment="com.hut.reoger.doc.settings.view.SettingsActivity$GeneralPreferenceFragment"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="@string/pref_header_help_center" />
+
+    <header
+        android:summary="测试以下这个"
+        android:fragment="com.hut.reoger.doc.settings.view.SettingsActivity$AccountPreferenceFragment"
+        android:icon="@drawable/ic_sync_black_24dp"
+        android:title="@string/pref_header_theme" />
+
+
+
+</preference-headers>

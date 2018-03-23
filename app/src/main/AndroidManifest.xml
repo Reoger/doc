@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:name=".App"
@@ -27,6 +28,13 @@
         <activity android:name=".user.view.LoginActivity"/>
         <activity android:name=".read.TestActivity2"/>
         <activity android:name=".read.DocumentReaderActivity"/>
+
+        <activity android:name=".feedback.view.FeedBackActivity"/>
+        <activity android:name=".settings.view.SettingsActivity"/>
+        <activity android:name=".search.view.SearchResultActivity"/>
+
+        <service android:name=".utils.downloader.service.DownloadService"/>
+
 
     </application>
 

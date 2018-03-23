@@ -1,0 +1,60 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory android:title="Dialog-based preferences" >
+    <EditTextPreference
+        android:capitalize="words"
+        android:defaultValue="@string/pref_default_display_name"
+        android:inputType="textCapWords"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:dialogTitle="修改用户名"
+        android:key="ed_user_name"
+        android:summary="修改用户名"
+        android:title="EditTextPreference" />
+
+        <EditTextPreference
+            android:defaultValue="@string/pref_default_display_name"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:dialogTitle="设置密码"
+            android:key="ed_user_password"
+            android:title="password" />
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="@string/pref_default_display_name"
+            android:inputType="number"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:dialogTitle="设置邮箱"
+            android:key="ed_user_phone"
+            android:summary="set phone"
+            android:title="phone" />
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="@string/pref_default_display_name"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:dialogTitle="设置邮箱"
+            android:key="ed_user_email"
+            android:summary="设置邮箱"
+            android:title="email" />
+    </PreferenceCategory>
+
+    <Preference android:title="safe setting">
+        <intent android:action="android.settings.SYNC_SETTINGS" />
+    </Preference>
+
+    <Preference android:title="layout user"
+        android:summary="layout setting">
+        <intent android:action=""/>
+    </Preference>
+
+</PreferenceScreen>

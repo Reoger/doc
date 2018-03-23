@@ -2,8 +2,9 @@ package com.hut.reoger.doc.utils.netWork
 
 
 import com.hut.reoger.doc.bean.Repo
+import com.hut.reoger.doc.bean.ServiceReply
 import com.hut.reoger.doc.home.model.ResultBySearchContent
-import com.hut.reoger.doc.home.model.SearchByContentBean
+import com.hut.reoger.doc.search.bean.SearchByContent
 import com.hut.reoger.doc.user.model.LoginInfo
 import com.hut.reoger.doc.user.model.RegisterInfo
 import io.reactivex.Observable
@@ -28,7 +29,16 @@ interface GitHubService{
     ,@Field("user_email")user_email:String,@Field("user_introduction")user_introduction:String): Observable<RegisterInfo>
 
     @POST("_search")
-    fun searchByContent(@Body searchByContentBean: SearchByContentBean): Observable<ResultBySearchContent>
+    fun searchByContent(@Body searchByContentBean: SearchByContent): Observable<ResultBySearchContent>
 
+    @FormUrlEncoded
+    @POST("userMaster/api/feedback.php")
+    fun feedBack(@Field("app_id") app_id:Int,@Field("did") did: String, @Field("version_id") version_id:Int,
+                 @Field("version_mini") version_mini:Int,@Field("feedback_log") feedback_log:String,@Field("links") links:String
+    ):Observable<ServiceReply>
+
+    @POST("userMaster/api/feedback.php")
+    fun feedError(@Field("app_id") app_id:Int,@Field("did") did: String, @Field("version_id") version_id:Int,
+                  @Field("version_mini") version_mini:Int,@Field("error_log") feedback_log:String):Observable<ServiceReply>
 
 }

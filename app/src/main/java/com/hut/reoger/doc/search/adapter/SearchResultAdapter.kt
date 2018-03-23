@@ -50,11 +50,9 @@ class SearchResultAdapter(mContext: Context?) : RecyclerView.Adapter<SearchResul
         if (list != null) {
             val item: Source = list!![position].source
             holder?.title?.text = item?.name
-            if (item?.content.length > 80)
-                item?.content = item.content.substring(80)
-            holder?.content?.text = item?.content
-            holder?.author?.text = item?.organization
-            holder?.time?.text = item?.uploadTime.toString()
+            holder?.content?.text = item?.organization
+            holder?.author?.text = item?.integer.toString()
+            holder?.time?.text = item?.time.toString()
 
         }
     }
