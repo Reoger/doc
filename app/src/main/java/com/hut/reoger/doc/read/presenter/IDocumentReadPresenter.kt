@@ -1,6 +1,6 @@
-package com.hut.reoger.doc.home.presenter
+package com.hut.reoger.doc.read.presenter
 
-import com.hut.reoger.doc.read.SuperFileView2
+import com.hut.reoger.doc.read.view.SuperFileView2
 
 /**
  * Created by reoger on 2018/3/25.

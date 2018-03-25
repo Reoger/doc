@@ -12,18 +12,16 @@ import android.view.MenuItem
 import com.hut.reoger.doc.App
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.feedback.view.FeedBackActivity
-import com.hut.reoger.doc.read.DocumentReaderActivity
+import com.hut.reoger.doc.read.view.DocumentReaderActivity
 import com.hut.reoger.doc.settings.view.SettingsActivity
+import com.hut.reoger.doc.utils.log.LogUtils
 import com.hut.reoger.doc.utils.log.TLog
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import kotlinx.android.synthetic.main.activity_content.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-/**
- * Created by CM on 2018/1/25.
- *
- */
+
 
 /**
  * Created by CM on 2018/1/25.
@@ -41,14 +39,18 @@ class HomeActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSelect
         Log.d("debug","这撒大声地的吗")
         when(item.itemId){
             R.id.nav_person->{
-//                startActivity(Intent(this,ReadActivity::class.java))
 
                 App.instance.showDialog(this)
             }
             R.id.nav_history->{
-                startActivity(Intent(this,DocumentReaderActivity::class.java))
+                //历史
             }
             R.id.nav_about->{
+                //这里打算弄一个沉浸式的界面
+                //加上我的个人信息介绍
+                LogUtils.d("测试测试11")
+            }
+            R.id.nav_settings->{
                 startActivity(Intent(this,SettingsActivity::class.java))
             }
             R.id.nav_share->{

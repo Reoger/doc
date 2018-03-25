@@ -10,7 +10,7 @@
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateDrawable="@drawable/ic_pop_failure" />
+        android:indeterminateDrawable="@drawable/ic_loading" />
 
     <TextView
         android:id="@+id/id_tv_loadingmsg"

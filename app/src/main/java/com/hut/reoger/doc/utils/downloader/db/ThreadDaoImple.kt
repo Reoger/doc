@@ -67,6 +67,7 @@ class ThreadDaoImple : ThreadDao {
             )
             list.add(threadInfo)
         }
+        cursor.close()
         return list
     }
 

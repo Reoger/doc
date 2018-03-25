@@ -18,6 +18,7 @@ import com.hut.reoger.doc.home.presenter.HomeFragmentPresenter
 import com.hut.reoger.doc.home.presenter.IHomeFragmentPresenter
 import com.hut.reoger.doc.search.view.SearchResultActivity
 import com.hut.reoger.doc.utils.imageUtils.GlideImageLoader
+import com.hut.reoger.doc.utils.log.TLog
 
 import com.youth.banner.Banner
 import com.zhy.view.flowlayout.FlowLayout
@@ -89,7 +90,7 @@ class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListe
         }
 
         mFlowLayout.setOnTagClickListener({ _, position, _ ->
-            Log.d("TAG","这里显示的是主要的"+position)
+            TLog.d("TAG","这里显示的是主要的"+position)
             textView?.text = rr[position]
             presenter?.doSearch(rr[position])
             true

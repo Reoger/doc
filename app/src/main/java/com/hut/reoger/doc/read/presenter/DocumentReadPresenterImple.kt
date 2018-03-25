@@ -1,9 +1,10 @@
-package com.hut.reoger.doc.home.presenter
+package com.hut.reoger.doc.read.presenter
 
 import android.content.Context
 import android.os.Environment
 import android.text.TextUtils
-import com.hut.reoger.doc.read.SuperFileView2
+import com.hut.reoger.doc.read.view.IReadView
+import com.hut.reoger.doc.read.view.SuperFileView2
 import com.hut.reoger.doc.utils.log.TLog
 import com.hut.reoger.doc.utils.netWork.LoadFileModel
 import com.hut.reoger.doc.utils.safe.Md5Tool
@@ -20,7 +21,7 @@ import java.io.InputStream
  * Created by reoger on 2018/3/25.
  * 阅读界面的具体控制逻辑
  */
-class DocumentReadPresenterImple(val context:Context,val iDRPresenter: IDocumentReadPresenter):IDocumentReadPresenter{
+class DocumentReadPresenterImple(val context:Context,val mIReadView: IReadView): IDocumentReadPresenter {
 
     val TAG = "jj"
 
@@ -72,8 +73,9 @@ class DocumentReadPresenterImple(val context:Context,val iDRPresenter: IDocument
                         fos.write(buf, 0, len)
                         sum += len.toLong()
                         val progress = (sum * 1.0f / total!! * 100).toInt()
+                        mIReadView.updateProgress(progress)
                         TLog.d(TAG, "写入缓存文件" + fileN.name + "进度: " + progress)
-                        //这个地方可以添加
+                        //这个地方可以添加进度提示
                     }
                     fos.flush()
                     TLog.d(TAG, "文件下载成功,准备展示文件。")

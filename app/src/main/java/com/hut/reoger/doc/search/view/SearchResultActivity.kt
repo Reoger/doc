@@ -16,7 +16,7 @@ import com.hut.reoger.doc.search.presenter.DropDownListener
 import com.hut.reoger.doc.search.presenter.SearchResultPresenterImpl
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.hut.reoger.doc.read.DocumentReaderActivity
+import com.hut.reoger.doc.read.view.DocumentReaderActivity
 import com.hut.reoger.doc.search.adapter.ItemClickSupport
 
 
@@ -73,7 +73,8 @@ class SearchResultActivity : BaseActivity(),ISearchResultView {
             override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
                //点击事件,测试一下
                 toast("点击事件$position")
-                openActivity(DocumentReaderActivity::class.java)
+                val url = "http://www.hrssgz.gov.cn/bgxz/sydwrybgxz/201101/P020110110748901718161.doc"
+                openActivity(DocumentReaderActivity::class.java, DocumentReaderActivity.READ_ONLINE,url)
             }
         })
 

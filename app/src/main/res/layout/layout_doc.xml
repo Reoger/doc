@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.hut.reoger.doc.read.SuperFileView2
+    <com.hut.reoger.doc.read.view.SuperFileView2
         android:id="@+id/mSuperFileView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

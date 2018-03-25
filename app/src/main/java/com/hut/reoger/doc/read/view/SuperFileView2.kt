@@ -1,4 +1,4 @@
-package com.hut.reoger.doc.read
+package com.hut.reoger.doc.read.view
 
 import android.content.Context
 import android.os.Bundle
