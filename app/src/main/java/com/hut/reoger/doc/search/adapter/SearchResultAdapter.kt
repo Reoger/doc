@@ -2,13 +2,16 @@ package com.hut.reoger.doc.search.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.hut.reoger.doc.R
-import com.hut.reoger.doc.home.model.Hit
-import com.hut.reoger.doc.home.model.Source
+import com.hut.reoger.doc.search.bean.Hits
+import com.hut.reoger.doc.search.bean.HitsItem
+import com.hut.reoger.doc.search.view.SizeLabel
+import com.hut.reoger.doc.utils.log.TLog
 
 
 /**
@@ -18,18 +21,18 @@ import com.hut.reoger.doc.home.model.Source
 class SearchResultAdapter(mContext: Context?) : RecyclerView.Adapter<SearchResultAdapter.ItemHolder>() {
 
     var mContext: Context ?= null
-    private var list :List<Hit>?= null
+//    private var list :List<Hit>?= null
 
+    private var data : Hits ?=null
 //    private var listData :MutableList<Hit>? = null
 
     init {
-
         this.mContext = mContext
     }
 
-    fun setData(list: List<Hit>){
+    fun setData(data: Hits){
 
-       this.list = list
+        this.data = data
         notifyDataSetChanged()
     }
 
@@ -40,19 +43,23 @@ class SearchResultAdapter(mContext: Context?) : RecyclerView.Adapter<SearchResul
     }
 
     override fun getItemCount(): Int {
-        list?.let {
-            return list?.size!!
+        data?.let {
+            return data?.hits?.size!!
         }
         return 0
     }
 
     override fun onBindViewHolder(holder: ItemHolder?, position: Int) {
-        if (list != null) {
-            val item: Source = list!![position].source
-            holder?.title?.text = item?.name
-            holder?.content?.text = item?.organization
-            holder?.author?.text = item?.integer.toString()
-            holder?.time?.text = item?.time.toString()
+        if (data != null) {
+            val item : HitsItem =data!!.hits!![position]
+            holder?.title?.text = item?.Source.name  //设置标题
+            var contents =  item?.highlight.content.toString()
+            contents.removeSuffix("/r")
+            contents.removeSuffix("/n")
+//            contents.replace("em","strong") //暂时先不管，后面在进行修改。
+            holder?.content?.text = Html.fromHtml(contents) //设置内容
+            holder?.author?.text = item?.Source.author   //作者
+            holder?.time?.text = item?.Source.time.toString() //时间
 
         }
     }

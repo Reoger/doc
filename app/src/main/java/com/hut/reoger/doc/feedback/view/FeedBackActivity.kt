@@ -2,7 +2,7 @@ package com.hut.reoger.doc.feedback.view
 
 import android.os.Bundle
 import android.text.TextUtils
-import com.example.cm.mytestdemo.base.BaseActivity
+import com.hut.reoger.doc.base.BaseActivity
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.feedback.presenter.FeedBackPresenterImpl
 import com.hut.reoger.doc.utils.log.TLog

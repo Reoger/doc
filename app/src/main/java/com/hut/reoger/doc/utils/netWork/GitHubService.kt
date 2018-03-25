@@ -4,7 +4,8 @@ package com.hut.reoger.doc.utils.netWork
 import com.hut.reoger.doc.bean.Repo
 import com.hut.reoger.doc.bean.ServiceReply
 import com.hut.reoger.doc.home.model.ResultBySearchContent
-import com.hut.reoger.doc.search.bean.SearchByContent
+import com.hut.reoger.doc.search.bean.ResultAsSearchBean
+import com.hut.reoger.doc.search.bean.SearchByContentBean
 import com.hut.reoger.doc.user.model.LoginInfo
 import com.hut.reoger.doc.user.model.RegisterInfo
 import io.reactivex.Observable
@@ -29,7 +30,7 @@ interface GitHubService{
     ,@Field("user_email")user_email:String,@Field("user_introduction")user_introduction:String): Observable<RegisterInfo>
 
     @POST("_search")
-    fun searchByContent(@Body searchByContentBean: SearchByContent): Observable<ResultBySearchContent>
+    fun searchByContent(@Body searchByContentBean: SearchByContentBean): Observable<ResultAsSearchBean>
 
     @FormUrlEncoded
     @POST("userMaster/api/feedback.php")

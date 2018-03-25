@@ -2,7 +2,7 @@ package com.hut.reoger.doc.user.view
 
 import android.os.Bundle
 
-import com.example.cm.mytestdemo.base.BaseActivity
+import com.hut.reoger.doc.base.BaseActivity
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.home.view.HomeActivity
 import com.hut.reoger.doc.user.presener.ILoginPresenter

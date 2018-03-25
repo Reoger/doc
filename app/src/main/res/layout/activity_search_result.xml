@@ -10,6 +10,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:text="搜索的内容"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show result"
+        android:id="@+id/tv_show_search_result"
+        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_search_result"
         android:layout_width="match_parent"

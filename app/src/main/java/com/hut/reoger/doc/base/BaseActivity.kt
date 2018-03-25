@@ -1,5 +1,5 @@
 
-package com.example.cm.mytestdemo.base
+package com.hut.reoger.doc.base
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -28,8 +28,6 @@ import kotlinx.android.synthetic.main.activity_base.*
 import com.hut.reoger.doc.utils.loadingUtils.SlidingInAndOutDialogFragment
 
 
-
-
 /**
  * Created by CM on 2018/1/23.
  *
@@ -43,6 +41,9 @@ abstract class BaseActivity : RxAppCompatActivity() {
     private var menuRes: Int = -1
 
     protected var dialog: Dialog?= null
+
+
+
 
 
 
@@ -239,6 +240,10 @@ abstract class BaseActivity : RxAppCompatActivity() {
         val newFragment = SlidingInAndOutDialogFragment()
         newFragment.show(ft, "dialog")
     }
+
+
+
+
 
 
 }

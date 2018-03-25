@@ -1,9 +1,7 @@
 package com.hut.reoger.doc.feedback.presenter
 
-import android.util.Log
-import com.example.cm.mytestdemo.base.BaseActivity
+import com.hut.reoger.doc.base.BaseActivity
 import com.hut.reoger.doc.bean.ServiceReply
-import com.hut.reoger.doc.feedback.bean.FeedBackBean
 import com.hut.reoger.doc.feedback.view.IFeedBackView
 import com.hut.reoger.doc.utils.log.TLog
 import com.hut.reoger.doc.utils.netWork.ApiClient

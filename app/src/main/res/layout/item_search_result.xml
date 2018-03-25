@@ -18,14 +18,13 @@
             android:layout_height="wrap_content"
             android:text="title"
             android:textSize="15sp"
-            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:textStyle="bold"
-            />
+            android:layout_marginStart="8dp" />
         <TextView
             android:id="@+id/item_search_content"
             android:text="content"
-            android:lines="2"
             android:layout_margin="2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

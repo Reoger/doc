@@ -13,7 +13,6 @@ import com.hut.reoger.doc.App
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.feedback.view.FeedBackActivity
 import com.hut.reoger.doc.read.DocumentReaderActivity
-import com.hut.reoger.doc.read.TestActivity2
 import com.hut.reoger.doc.settings.view.SettingsActivity
 import com.hut.reoger.doc.utils.log.TLog
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
@@ -42,7 +41,7 @@ class HomeActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSelect
         Log.d("debug","这撒大声地的吗")
         when(item.itemId){
             R.id.nav_person->{
-//                startActivity(Intent(this,TestActivity2::class.java))
+//                startActivity(Intent(this,ReadActivity::class.java))
 
                 App.instance.showDialog(this)
             }

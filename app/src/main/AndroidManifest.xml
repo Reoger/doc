@@ -26,7 +26,6 @@
 
         <activity android:name=".home.view.HomeActivity"/>
         <activity android:name=".user.view.LoginActivity"/>
-        <activity android:name=".read.TestActivity2"/>
         <activity android:name=".read.DocumentReaderActivity"/>
 
         <activity android:name=".feedback.view.FeedBackActivity"/>

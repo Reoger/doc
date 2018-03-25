@@ -1,14 +1,12 @@
-package com.hut.reoger.doc.read
+package com.hut.reoger.doc.home.presenter
 
-import android.os.Bundle
+import android.content.Context
 import android.os.Environment
 import android.text.TextUtils
-import com.hut.reoger.doc.base.BaseActivity
-import com.hut.reoger.doc.R
+import com.hut.reoger.doc.read.SuperFileView2
 import com.hut.reoger.doc.utils.log.TLog
 import com.hut.reoger.doc.utils.netWork.LoadFileModel
 import com.hut.reoger.doc.utils.safe.Md5Tool
-import com.tencent.smtt.sdk.CacheManager.getCacheFile
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,71 +17,14 @@ import java.io.IOException
 import java.io.InputStream
 
 /**
- * Created by reoger on 2018/3/2.
+ * Created by reoger on 2018/3/25.
+ * 阅读界面的具体控制逻辑
  */
+class DocumentReadPresenterImple(val context:Context,val iDRPresenter: IDocumentReadPresenter):IDocumentReadPresenter{
 
+    val TAG = "jj"
 
-class DocumentReaderActivity : BaseActivity(),IReadView {
-    private var mSuperFileView: SuperFileView2? = null
-
-
-    //    String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/test.docx";
-    private var filePath = "http://www.hrssgz.gov.cn/bgxz/sydwrybgxz/201101/P020110110748901718161.doc"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_doc)
-        TLog.d("TAG", "filePath = --->" + filePath)
-
-    }
-
-
-    override fun setActionBar() {
-       setActivityTitle("在线阅读界面")
-    }
-
-    override fun initView() {
-        init()
-    }
-
-
-    private fun init() {
-        mSuperFileView = findViewById(R.id.mSuperFileView)
-        mSuperFileView!!.setOnGetFilePathListener(object : SuperFileView2.OnGetFilePathListener {
-            override fun onGetFilePath(mSuperFileView2: SuperFileView2) {
-                getFilePathAndShowFile(mSuperFileView2)
-            }
-        })
-
-        mSuperFileView!!.show()
-
-    }
-
-
-    private fun getFilePathAndShowFile(mSuperFileView2: SuperFileView2) {
-
-
-        if (filePath.contains("http")) {//网络地址要先下载
-
-            downLoadFromNet(filePath, mSuperFileView2)
-
-        } else {
-            mSuperFileView2.displayFile(File(filePath))
-        }
-    }
-
-
-    public override fun onDestroy() {
-        super.onDestroy()
-        TLog.d("FileDisplayActivity-->onDestroy")
-        if (mSuperFileView != null) {
-            mSuperFileView!!.onStopDisplay()
-        }
-    }
-
-
-    private fun downLoadFromNet(url: String, mSuperFileView2: SuperFileView2) {
-
+    override fun downLoadFromNet(url: String, mSuperFileView2: SuperFileView2) {
         //1.网络下载、存储路径、
         val cacheFile = getCacheFile(url)
         if (cacheFile.exists()) {
@@ -114,8 +55,6 @@ class DocumentReaderActivity : BaseActivity(),IReadView {
                         TLog.d(TAG, "创建缓存目录： " + file1.toString())
                     }
 
-
-                    //fileN : /storage/emulated/0/pdf/kauibao20170821040512.pdf
                     val fileN = getCacheFile(url)//new File(getCacheDir(url), getFileName(url))
 
                     TLog.d(TAG, "创建缓存文件： " + fileN.toString())
@@ -134,6 +73,7 @@ class DocumentReaderActivity : BaseActivity(),IReadView {
                         sum += len.toLong()
                         val progress = (sum * 1.0f / total!! * 100).toInt()
                         TLog.d(TAG, "写入缓存文件" + fileN.name + "进度: " + progress)
+                        //这个地方可以添加
                     }
                     fos.flush()
                     TLog.d(TAG, "文件下载成功,准备展示文件。")
@@ -161,25 +101,10 @@ class DocumentReaderActivity : BaseActivity(),IReadView {
                 TLog.d(TAG, "文件下载失败")
                 val file = getCacheFile(url)
                 if (!file.exists()) {
-                    TLog.d(TAG, "删除下载失败文件")
                     file.delete()
                 }
             }
         })
-
-
-    }
-
-    /***
-     * 获取缓存目录
-     *
-     * @param url
-     * @return
-     */
-    private fun getCacheDir(url: String): File {
-
-        return File(Environment.getExternalStorageDirectory().absolutePath + "/007/")
-
     }
 
     /***
@@ -193,6 +118,18 @@ class DocumentReaderActivity : BaseActivity(),IReadView {
                 + getFileName(url))
         TLog.d(TAG, "缓存文件 = " + cacheFile.toString())
         return cacheFile
+    }
+
+    /***
+     * 获取缓存目录
+     *
+     * @param url
+     * @return
+     */
+    private fun getCacheDir(url: String): File {
+
+        return File(Environment.getExternalStorageDirectory().absolutePath + "/007/")
+
     }
 
     /***
