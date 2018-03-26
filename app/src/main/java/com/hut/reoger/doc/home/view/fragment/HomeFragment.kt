@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,10 +16,14 @@ import android.widget.TextView
 import com.example.cm.mytestdemo.base.BaseFragment
 import com.example.cm.mytestdemo.home.view.fragment.IHomeFragmentView
 import com.hut.reoger.doc.R
+import com.hut.reoger.doc.home.adapter.HistoryAdapter
 import com.hut.reoger.doc.home.presenter.HomeFragmentPresenter
 import com.hut.reoger.doc.home.presenter.IHomeFragmentPresenter
+import com.hut.reoger.doc.read.view.DocumentReaderActivity
+import com.hut.reoger.doc.search.adapter.ItemClickSupport
 import com.hut.reoger.doc.search.view.SearchResultActivity
 import com.hut.reoger.doc.utils.imageUtils.GlideImageLoader
+import com.hut.reoger.doc.utils.log.LogUtils
 import com.hut.reoger.doc.utils.log.TLog
 
 import com.youth.banner.Banner
@@ -31,10 +37,8 @@ import com.zhy.view.flowlayout.TagFlowLayout
  */
 
 class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListener, IHomeFragmentView {
-    @RequiresApi(Build.VERSION_CODES.M)
-    override fun loadSuccessful(data: String) {
-        openActivity(SearchResultActivity::class.java,"search",data)
-    }
+
+
 
     var presenter: IHomeFragmentPresenter?= null
 
@@ -56,6 +60,11 @@ class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListe
 
     private object Inner{
         val fragment = HomeFragment()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun loadSuccessful(data: String) {
+        openActivity(SearchResultActivity::class.java,"search",data)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -90,7 +99,7 @@ class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListe
         }
 
         mFlowLayout.setOnTagClickListener({ _, position, _ ->
-            TLog.d("TAG","这里显示的是主要的"+position)
+            TLog.d("TAG", "这里显示的是主要的$position")
             textView?.text = rr[position]
             presenter?.doSearch(rr[position])
             true
@@ -141,8 +150,27 @@ class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListe
 
         //https://github.com/youth5201314/banner
 
+        val historyAdapter = HistoryAdapter(v.context)
+        val listView :RecyclerView= v.findViewById(R.id.recycler_history)
+        val manager = LinearLayoutManager(v.context, LinearLayoutManager.VERTICAL, false)
+        listView.adapter = historyAdapter
+        listView.layoutManager = manager
 
-
+        val historyData = presenter?.loadHistoryFormDB()
+        if (null==historyData|| historyData.isEmpty()){
+            //提示没有历史数据
+            LogUtils.d("暂时没有任何数据")
+        }else {
+            historyAdapter.setData(historyData)
+            LogUtils.d("加载了数据")
+        }
+        ItemClickSupport.addTo(listView).setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
+            override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
+                //点击事件,测试一下
+                val url = "http://www.hrssgz.gov.cn/bgxz/sydwrybgxz/201101/P020110110748901718161.doc"
+                openActivity(DocumentReaderActivity::class.java, DocumentReaderActivity.READ_ONLINE,url)
+            }
+        })
 
     }
 

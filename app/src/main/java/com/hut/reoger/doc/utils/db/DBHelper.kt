@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper
  */
 class DBHelper: SQLiteOpenHelper{
 
-    private val SQL_CREATE = "create table read_history if not exists(_id integer primary key autoincrement,\n" +
+    private val SQL_CREATE = "create table read_history(_id integer primary key autoincrement,\n" +
             "doc_index text,doc_type text,doc_id text,doc_score text,doc_down_link text,doc_update_time INTEGER,\n" +
             "doc_size long,doc_author text,doc_name text,doc_time integer,doc_content text)"
     private  val  SQL_DROP = "drop table if exists read_history"

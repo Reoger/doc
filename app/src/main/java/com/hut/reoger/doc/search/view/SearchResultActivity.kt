@@ -18,8 +18,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.hut.reoger.doc.read.view.DocumentReaderActivity
 import com.hut.reoger.doc.search.adapter.ItemClickSupport
-
-
+import com.hut.reoger.doc.utils.db.HistoryDbImpl
+import com.hut.reoger.doc.utils.db.IHistoryDao
 
 
 /**
@@ -33,7 +33,9 @@ class SearchResultActivity : BaseActivity(),ISearchResultView {
     private var myHandler :MyHandler ?=null
     private var mSearchPresenter :SearchResultPresenterImpl?= null
     private var mAdapter :SearchResultAdapter ?=null
+    private var IHistoryDao :IHistoryDao ?=null
 
+    private var dataResult :ResultAsSearchBean ?=null
 
     companion object {
         const val  SHOW_SEARCH_RESULT = 0x0001
@@ -44,7 +46,7 @@ class SearchResultActivity : BaseActivity(),ISearchResultView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_result)
         myHandler = MyHandler(this)
-
+        IHistoryDao = HistoryDbImpl(this)
     }
 
     override fun setActionBar() {
@@ -74,6 +76,7 @@ class SearchResultActivity : BaseActivity(),ISearchResultView {
                //点击事件,测试一下
                 toast("点击事件$position")
                 val url = "http://www.hrssgz.gov.cn/bgxz/sydwrybgxz/201101/P020110110748901718161.doc"
+                IHistoryDao?.insertReadHistory(dataResult!!.hits.hits!![position])//插入数据库
                 openActivity(DocumentReaderActivity::class.java, DocumentReaderActivity.READ_ONLINE,url)
             }
         })
@@ -92,6 +95,7 @@ class SearchResultActivity : BaseActivity(),ISearchResultView {
         msg.what = SHOW_SEARCH_RESULT
         msg.obj = "总共找到+${data.hits.total}个相关文件，相关系数最高为${data.hits.maxScore}"
         myHandler?.sendMessage(msg)
+        this.dataResult = data
         mAdapter?.setData(data.hits)
     }
 

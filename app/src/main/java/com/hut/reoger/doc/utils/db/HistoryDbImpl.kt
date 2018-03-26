@@ -5,6 +5,7 @@ import com.hut.reoger.doc.search.bean.HitsItem
 import android.content.ContentValues
 import com.hut.reoger.doc.search.bean.Highlights
 import com.hut.reoger.doc.search.bean.Source
+import com.hut.reoger.doc.utils.log.LogUtils
 import java.util.ArrayList
 
 
@@ -15,7 +16,7 @@ import java.util.ArrayList
 class HistoryDbImpl :IHistoryDao{
 
 
-    var mDBHelper: DBHelper? = null
+    private var mDBHelper: DBHelper? = null
 
     companion object {
         val HISTORY_TABLE_NAME = "read_history"
@@ -75,10 +76,11 @@ class HistoryDbImpl :IHistoryDao{
     override fun getReadHistory(): List<HitsItem> {
         val list = ArrayList<HitsItem>()
         val db = mDBHelper?.readableDatabase
-        val cursor = db?.rawQuery("select * from $HISTORY_TABLE_NAME order by doc_time desc",null)
-
+        val cursor = db?.rawQuery("select * from read_history order by doc_time desc",null)
+        LogUtils.d("cursor正常?=>"+cursor.toString())
         while (cursor!!.moveToNext()) {
-            val item  = HitsItem(Highlights(listOf(cursor.getString(cursor.getColumnIndex("content")))),cursor.getString(cursor.getColumnIndex("doc_index")),
+            LogUtils.d("cursor正常?=> i lu u")
+            val item  = HitsItem(Highlights(listOf(cursor.getString(cursor.getColumnIndex("doc_content")))),cursor.getString(cursor.getColumnIndex("doc_index")),
                     cursor.getString(cursor.getColumnIndex("doc_type")), Source(cursor.getString(cursor.getColumnIndex("doc_down_link")),
                     cursor.getLong(cursor.getColumnIndex("doc_update_time")),cursor.getInt(cursor.getColumnIndex("doc_size")),
                     cursor.getString(cursor.getColumnIndex("doc_author")),cursor.getString(cursor.getColumnIndex("doc_name")),
@@ -95,9 +97,9 @@ class HistoryDbImpl :IHistoryDao{
     override fun getScollData(offest: Int, maxResult: Int): List<HitsItem> {
         val list = ArrayList<HitsItem>()
         val db = mDBHelper?.readableDatabase
-        val cursor = db?.rawQuery("select * from $HISTORY_TABLE_NAME order by doc_time desc  limit ?,?", arrayOf(offest.toString(),maxResult.toString()))
+        val cursor = db?.rawQuery("select * from read_history order by doc_time desc  limit ?,?", arrayOf(offest.toString(),maxResult.toString()))
         while (cursor!!.moveToNext()) {
-            val item  = HitsItem(Highlights(listOf(cursor.getString(cursor.getColumnIndex("content")))),cursor.getString(cursor.getColumnIndex("doc_index")),
+            val item  = HitsItem(Highlights(listOf(cursor.getString(cursor.getColumnIndex("doc_content")))),cursor.getString(cursor.getColumnIndex("doc_index")),
                     cursor.getString(cursor.getColumnIndex("doc_type")), Source(cursor.getString(cursor.getColumnIndex("doc_down_link")),
                     cursor.getLong(cursor.getColumnIndex("doc_update_time")),cursor.getInt(cursor.getColumnIndex("doc_size")),
                     cursor.getString(cursor.getColumnIndex("doc_author")),cursor.getString(cursor.getColumnIndex("doc_name")),

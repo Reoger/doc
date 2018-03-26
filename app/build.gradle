@@ -65,5 +65,8 @@ dependencies {
     implementation(['com.trello.rxlifecycle2:rxlifecycle-kotlin:2.2.0',
                     'com.trello.rxlifecycle2:rxlifecycle-components:2.2.0'])
 
+    //数据库查看
+    debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
+
 
 }
