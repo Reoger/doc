@@ -34,6 +34,8 @@
 
         <service android:name=".utils.downloader.service.DownloadService"/>
 
+        <activity android:name=".uploader.view.UploaderActivity"/>
+
 
     </application>
 

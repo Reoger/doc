@@ -1,11 +1,15 @@
 package com.hut.reoger.doc.home.view
 
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.cm.mytestdemo.base.BaseFragment
+import com.hut.reoger.doc.App
 import com.hut.reoger.doc.R
+import com.hut.reoger.doc.uploader.view.UploaderActivity
+import com.hut.reoger.doc.user.view.LoginActivity
 
 /**
  * Created by CM on 2018/2/1.
@@ -24,6 +28,20 @@ class DocumentFragment : BaseFragment(){
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view : View = inflater!!.inflate(R.layout.fragment_document,container,false)
+        initView(view)
         return view
+    }
+
+    private fun initView(view: View) {
+        val floatingActionButton = view?.findViewById<FloatingActionButton>(R.id.floatingActionButton)
+        floatingActionButton.setOnClickListener({
+            //点击事件
+            if (App.instance.user== null ||App.instance.passWord== null){
+                openActivity(LoginActivity::class.java)
+            }else{
+                openActivity(UploaderActivity::class.java)
+            }
+
+        })
     }
 }

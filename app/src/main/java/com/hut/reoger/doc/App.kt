@@ -22,6 +22,8 @@ class App : Application()  {
         ExceptionHandler.instance.initConfig(this)
     }
 
+     var user :String ?=null
+     var passWord :String ?=null
 
     fun  showDialog(context:Activity) {
         // DialogFragment.show() will take care of adding the fragment

@@ -12,6 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory
  *
  */
 class ApiClient  private constructor(){
+
+
     lateinit var service: GitHubService
 
     private object Holder {
@@ -20,6 +22,7 @@ class ApiClient  private constructor(){
 
     companion object {
         val instance by lazy { Holder.INSTANCE }
+        val UPLOADER_FULE_URL = "www.baidu.com"
     }
 
     fun init() {  //在Application的onCreate中调用一次即可
