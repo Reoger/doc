@@ -20,6 +20,8 @@
         <item name="colorPrimaryDark">#19ccf9</item>
         <!-- 窗口的背景颜色 -->
         <item name="android:windowBackground">@android:color/white</item>
+
+        <item name="preferenceTheme">@style/myPreferenceScreen</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -55,5 +57,12 @@
         <item name="android:windowExitAnimation">@anim/dialog_anim_out</item>
     </style>
 
+
+
+    <style name="myPreferenceScreen" parent="PreferenceThemeOverlay.v14.Material">
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollbarFadeDuration">1</item>
+    </style>
 
 </resources>

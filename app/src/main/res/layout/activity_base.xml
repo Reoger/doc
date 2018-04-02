@@ -3,38 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?android:actionBarSize"
-        android:background="#123">
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="我的App"
-            android:textSize="17sp"
-            android:textColor="#FFFFFF" />
-
-        <TextView
-            android:id="@+id/am_right_tv"
-            android:layout_width="?android:actionBarSize"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:background="?attr/actionBarItemBackground"
-            android:clickable="true"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            tools:text="edit" />
-
-    </android.support.v7.widget.Toolbar>
 
     <ProgressBar
        android:layout_marginTop="70dp"
@@ -51,6 +23,35 @@
         android:layout_height="match_parent"
         android:orientation="vertical" />
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="我的App"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/am_right_tv"
+            android:layout_width="?android:actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="?attr/actionBarItemBackground"
+            android:clickable="true"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            tools:text="edit" />
+
+    </android.support.v7.widget.Toolbar>
 
 
 </FrameLayout>

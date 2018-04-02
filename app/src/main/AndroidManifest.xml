@@ -36,6 +36,9 @@
 
         <activity android:name=".uploader.view.UploaderActivity"/>
 
+        <activity android:name=".about.view.AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
 
     </application>
 

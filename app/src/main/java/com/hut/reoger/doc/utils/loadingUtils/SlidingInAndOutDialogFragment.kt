@@ -8,6 +8,8 @@ import android.view.View
 import android.view.Window
 import android.widget.Button
 import com.hut.reoger.doc.R
+import com.hut.reoger.doc.utils.log.LogUtils
+import com.hut.reoger.doc.utils.log.TLog
 
 
 /**
@@ -35,20 +37,20 @@ class SlidingInAndOutDialogFragment : DialogFragment() {
         //	  setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo);
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup,
-                              savedInstanceState: Bundle): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
         dialog.window.requestFeature(Window.FEATURE_NO_TITLE)
         val v = inflater.inflate(R.layout.custom_dialog, null) as View
 
         button =   v.findViewById(R.id.button1)
 
-//        button?.setOnClickListener({
-//            view->when(view.id){
-//            R.id.button1->{
-//                TLog.d("this had click the button ~")
-//            }
-//        }
-//        })
+        button?.setOnClickListener({
+            view->when(view.id){
+            R.id.button1->{
+                LogUtils.d("this had click the button ~")
+            }
+        }
+        })
         return v
     }
 }

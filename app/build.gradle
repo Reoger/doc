@@ -68,5 +68,8 @@ dependencies {
     //数据库查看
     debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
 
+    //为了关于
+    compile 'com.android.support:preference-v14:25.1.1'
+
 
 }

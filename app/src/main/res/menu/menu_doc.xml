@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_comment"
+        android:icon="@drawable/ic_menu_gallery"
+        app:showAsAction="collapseActionView"
+        android:title="评论文档" />
+    <item
+        android:id="@+id/menu_mark"
+        android:icon="@drawable/ic_menu_gallery"
+        android:title="收藏文档" />
+    <item
+        android:id="@+id/menu_about"
+        android:icon="@drawable/ic_menu_slideshow"
+        android:title="关于文档" />
+    <item
+        android:id="@+id/menu_setting"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="阅读设置" />
+
+    <item
+        android:id="@+id/menu_share"
+        android:icon="@drawable/ic_menu_share"
+        android:title="分享文档" />
+    <item
+        android:id="@+id/menu_show_marks"
+        android:icon="@drawable/ic_menu_send"
+        android:title="查看评论" />
+
+</menu>

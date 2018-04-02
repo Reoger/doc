@@ -92,8 +92,8 @@ abstract class BaseActivity : RxAppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if( menuRes!=-1 && onMenuItemClickListener!= null) {
             menuInflater?.inflate(menuRes, menu)
-        }
-
+        }else
+            return super.onCreateOptionsMenu(menu)
         return true
     }
 

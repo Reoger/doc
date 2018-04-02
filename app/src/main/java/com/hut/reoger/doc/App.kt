@@ -19,7 +19,7 @@ class App : Application()  {
     override fun onCreate() {
         super.onCreate()
         ApiClient.instance.init()
-        ExceptionHandler.instance.initConfig(this)
+//        ExceptionHandler.instance.initConfig(this)
     }
 
      var user :String ?=null
@@ -35,7 +35,7 @@ class App : Application()  {
             ft.remove(prev)
         }
         ft.addToBackStack(null)
-        //      ft.setCustomAnimations(R.anim.fragment_slide_left_enter, 0);
+//              ft.setCustomAnimations(R.anim.fragment_slide_left_enter, 0);
 
         // Create and show the dialog.
         val newFragment = SlidingInAndOutDialogFragment()

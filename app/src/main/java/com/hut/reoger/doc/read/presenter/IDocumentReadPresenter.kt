@@ -12,4 +12,17 @@ interface IDocumentReadPresenter {
      * 从网络上下载
      */
     fun downLoadFromNet(url: String, mSuperFileView2: SuperFileView2)
+
+    /**
+     * 添加评论
+     */
+    fun doComment(comments:String,usr:String,doc_id:String)
+
+    /**
+     * 加载评论
+     * 以doc_id为准
+     */
+    fun loadComments(doc_id:String)
+
+
 }

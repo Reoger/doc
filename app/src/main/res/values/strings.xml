@@ -17,6 +17,20 @@
     <string name="title_tool">工具</string>
     <string name="title_activity_login">Sign in</string>
 
+    <string name="author">作者</string>
+    <string name="introduction">作品简介</string>
+    <string name="background">背景</string>
+    <string name="background_details">这里写巴拉拉 一大堆</string>
+    <string name="open_github">开源地址</string>
+    <string name="github_url">https://github.com/Reoger/doc</string>
+    <string name="about_author">关于作者</string>
+    <string name="author_detail">爱学习，爱生活！</string>
+    <string name="blog_address">reoger.tk</string>
+    <string name="blog_address_app">app下载地址</string>
+    <string name="blog">博客</string>
+
+    <string name="blog_app">博客app</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -104,5 +118,6 @@
     <string name="pref_header_account">账号管理</string>
     <string name="pref_header_check_update">检查更新</string>
     <string name="pref_header_about">关于文档</string>
+    <string name="version">1.0.1</string>
 
 </resources>

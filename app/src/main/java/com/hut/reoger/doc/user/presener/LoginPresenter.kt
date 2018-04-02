@@ -32,7 +32,7 @@ class LoginPresenter(var mContext: RxAppCompatActivity?, var longview: ILoginVie
         }
     }
 
-    @SuppressLint("ApplySharedPref")
+
     override fun rememberPasswd(isRemember: Boolean, userName: String, password: String) {
         val sp: SharedPreferences = mContext?.getSharedPreferences(Constance.REMEMBER_PASSWD, Context.MODE_PRIVATE)!!
         val edit = sp.edit()
@@ -43,6 +43,7 @@ class LoginPresenter(var mContext: RxAppCompatActivity?, var longview: ILoginVie
         } else {
             edit.putBoolean(Constance.ISEMBER, false)
         }
+        edit.apply()
         edit.commit()
     }
 

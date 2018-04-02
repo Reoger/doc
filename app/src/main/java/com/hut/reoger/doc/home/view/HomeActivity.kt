@@ -11,16 +11,16 @@ import android.view.Menu
 import android.view.MenuItem
 import com.hut.reoger.doc.App
 import com.hut.reoger.doc.R
+import com.hut.reoger.doc.about.view.AboutActivity
 import com.hut.reoger.doc.feedback.view.FeedBackActivity
 import com.hut.reoger.doc.read.view.DocumentReaderActivity
 import com.hut.reoger.doc.settings.view.SettingsActivity
+import com.hut.reoger.doc.share.ShareUtils
 import com.hut.reoger.doc.utils.log.LogUtils
-import com.hut.reoger.doc.utils.log.TLog
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import kotlinx.android.synthetic.main.activity_content.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-
 
 
 /**
@@ -40,21 +40,25 @@ class HomeActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSelect
         when(item.itemId){
             R.id.nav_person->{
 
-                App.instance.showDialog(this)
+//                App.instance.showDialog(this)
+                startActivity(Intent(HomeActivity@this,DocumentReaderActivity::class.java))
             }
             R.id.nav_history->{
                 //历史
+                val shareUtils = ShareUtils(this)
+                shareUtils.shareImage("test")
             }
             R.id.nav_about->{
                 //这里打算弄一个沉浸式的界面
                 //加上我的个人信息介绍
-                LogUtils.d("测试测试11")
+                startActivity(Intent(HomeActivity@this,AboutActivity::class.java))
             }
             R.id.nav_settings->{
                 startActivity(Intent(this,SettingsActivity::class.java))
             }
             R.id.nav_share->{
-                TLog.d("T"+1/0+"T")
+                val shareUtils = ShareUtils(this)
+                shareUtils.shareText("这里是标题")
             }
             R.id.nav_feedfack->{
                 startActivity(Intent(this,FeedBackActivity::class.java))
@@ -132,10 +136,10 @@ class HomeActivity : RxAppCompatActivity(),NavigationView.OnNavigationItemSelect
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             R.id.action_setting->{
-
+                LogUtils.d("点击了设置")
             }else ->{
             return true
-        }
+            }
         }
         return super.onOptionsItemSelected(item)
 

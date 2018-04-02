@@ -23,6 +23,14 @@ import java.io.InputStream
  */
 class DocumentReadPresenterImple(val context:Context,val mIReadView: IReadView): IDocumentReadPresenter {
 
+    override fun doComment(comments: String, usr: String, doc_id: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun loadComments(doc_id: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     val TAG = "jj"
 
     override fun downLoadFromNet(url: String, mSuperFileView2: SuperFileView2) {
