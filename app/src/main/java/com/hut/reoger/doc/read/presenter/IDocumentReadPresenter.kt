@@ -16,7 +16,7 @@ interface IDocumentReadPresenter {
     /**
      * 添加评论
      */
-    fun doComment(comments:String,usr:String,doc_id:String)
+    fun doComment(comments:String,usr:String,doc_id:String,score:Int)
 
     /**
      * 加载评论

@@ -5,5 +5,5 @@ package com.hut.reoger.doc.read.`interface`
  * 用于fragment和activity之间的通信
  */
 interface ICallBack{
-    fun response(message:String)
+    fun response(message:String,score:Int)
 }

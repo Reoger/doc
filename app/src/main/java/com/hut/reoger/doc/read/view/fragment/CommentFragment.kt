@@ -8,14 +8,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import com.hut.reoger.doc.R
-import com.hut.reoger.doc.base.BaseDiaologFragment
+import com.hut.reoger.doc.base.BaseDialogFragment
 import com.hut.reoger.doc.read.`interface`.ICallBack
-import com.hut.reoger.doc.utils.log.LogUtils
+import kotlinx.android.synthetic.main.fragment_dialog_comment.*
 
 /**
  * Created by reoger on 2018/4/2.
  */
-class CommentFragment : BaseDiaologFragment(){
+
+class CommentFragment : BaseDialogFragment(){
 
     //单利模式
     companion object {
@@ -40,11 +41,10 @@ class CommentFragment : BaseDiaologFragment(){
 
     private fun initView(view: View) {
 
-        val text = view.findViewById<EditText>(R.id.id_txt_username)
+        val text = view.findViewById<EditText>(R.id.comment_et)
         val btu = view.findViewById<Button>(R.id.comment_but)
         btu.setOnClickListener({
-            LogUtils.d("测试${text.text}")
-            callback?.response(text.text.toString())
+            callback?.response(text.text.toString(),comment_rating_bar.numStars)
             dismiss()
         })
     }

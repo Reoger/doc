@@ -25,7 +25,7 @@
         android:icon="@drawable/ic_menu_share"
         android:title="分享文档" />
     <item
-        android:id="@+id/menu_show_marks"
+        android:id="@+id/menu_show_comment"
         android:icon="@drawable/ic_menu_send"
         android:title="查看评论" />
 

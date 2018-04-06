@@ -16,6 +16,7 @@ import retrofit2.http.*
  */
 
 interface GitHubService{
+
     //请添加相应的`API`调用方法
     @GET("users/{user}/repos")
     fun listRepos(@Path("user") user: String): Observable<List<Repo>> //每个方法的返回值即一个Observable
@@ -38,8 +39,27 @@ interface GitHubService{
                  @Field("version_mini") version_mini:Int,@Field("feedback_log") feedback_log:String,@Field("links") links:String
     ):Observable<ServiceReply>
 
-    @POST("userMaster/api/feedback.php")
+
+    @FormUrlEncoded
+    @POST("userMaster/api/error.php")
     fun feedError(@Field("app_id") app_id:Int,@Field("did") did: String, @Field("version_id") version_id:Int,
                   @Field("version_mini") version_mini:Int,@Field("error_log") feedback_log:String):Observable<ServiceReply>
+
+    @FormUrlEncoded
+    @POST("userMaster/api/insertComment.php")
+    fun insertComment(@Field("token") token:String,@Field("comment_user_name") comment_user_name: String, @Field("comment_content") comment_content: String,
+                      @Field("comment_score") comment_score:Int, @Field("comment_doc_id") comment_doc_id:String):Observable<ServiceReply>
+
+    @FormUrlEncoded
+    @POST("userMaster/api/deleteComment.php")
+    fun deletComment(@Field("token") token:String, @Field("comment_doc_id") comment_doc_id:Int):Observable<ServiceReply>
+
+    @FormUrlEncoded
+    @POST("userMaster/api/queryCommentByUser.php")
+    fun queryCommentByUserID(@Field("token") token:String):Observable<ServiceReply>
+
+    @FormUrlEncoded
+    @POST("userMaster/api/queryCommentsByDoc.php")
+    fun queryCommentByDocId(@Field("token") token:String,@Field("comment_doc_id") comment_doc_id:String):Observable<ServiceReply>
 
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/comment_content"
+        android:gravity="center"
+        android:text="这里是内容"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/comment_user"
+        android:layout_below="@+id/comment_content"
+        android:layout_gravity="end"
+        android:text="用户名"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/comment_time"
+        android:layout_marginLeft="100dp"
+        android:layout_below="@+id/comment_content"
+        android:text="这里是时间"
+        android:layout_alignParentRight ="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+
+</RelativeLayout>

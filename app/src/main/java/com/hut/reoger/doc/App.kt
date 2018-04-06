@@ -24,6 +24,7 @@ class App : Application()  {
 
      var user :String ?=null
      var passWord :String ?=null
+     var token :String = "e463af6bafc9538e974341bab8da2dc1"//暂时先这么写
 
     fun  showDialog(context:Activity) {
         // DialogFragment.show() will take care of adding the fragment

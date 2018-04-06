@@ -1,18 +1,20 @@
 package com.hut.reoger.doc.read.view
 
+import android.app.Fragment
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
-import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import android.view.View
 import com.hut.reoger.doc.base.BaseActivity
 import com.hut.reoger.doc.R
-import com.hut.reoger.doc.R.id.mSuperFileView
+import com.hut.reoger.doc.bean.ServiceReply
 import com.hut.reoger.doc.read.`interface`.ICallBack
 import com.hut.reoger.doc.read.presenter.DocumentReadPresenterImple
+import com.hut.reoger.doc.read.presenter.IDocumentReadPresenter
 import com.hut.reoger.doc.read.view.fragment.CommentFragment
-import com.hut.reoger.doc.utils.log.LogUtils
+import com.hut.reoger.doc.read.view.fragment.CommentList
 import com.hut.reoger.doc.utils.log.TLog
+import kotlinx.android.synthetic.main.layout_doc.*
 import java.io.File
 import java.io.Serializable
 
@@ -24,9 +26,15 @@ import java.io.Serializable
 
 
 class DocumentReaderActivity : BaseActivity(), IReadView {
+    override fun commentFail(error: String) {
+        toast("评论失败$error")
+    }
+
+    override fun commentSuccessful(data: ServiceReply) {
+        toast("评论成功~")
+    }
 
     override fun updateProgress(progress: Int) {
-
         if (progress >= 99)
             stopLoad()
     }
@@ -38,7 +46,7 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
     }
 
 
-    private var mReadPresenter: DocumentReadPresenterImple? = null
+    private var mReadPresenter: IDocumentReadPresenter? = null
 
     private var filePath: String? = null
 
@@ -51,6 +59,7 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
 
     override fun setActionBar() {
         setActivityTitle("在线阅读界面")
+
     }
 
     override fun initView() {
@@ -76,22 +85,23 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
         setMenu(R.menu.menu_doc, Toolbar.OnMenuItemClickListener { item: MenuItem? ->
             when (item?.itemId) {
                 R.id.menu_comment -> {
-
+                    val diloag = CommentFragment.getInstance()
+                    val bundle = Bundle()
+                    bundle.putSerializable("callback", object :ICallBack, Serializable {
+                        override fun response(message: String,score:Int) {
+                            toast(message)
+                            //这里可以进行那个网络评论的实际操作
+                            mReadPresenter?.doComment(message,"admin","12345678",score)
+                        }
+                    })
+                    diloag.arguments = bundle
+                    diloag.show(fragmentManager, "tag")
                 }
                 R.id.menu_mark -> {
                     toast("点击了标记")
                 }
                 R.id.menu_about -> {
-                    val dilog = CommentFragment.getInstance()
 
-                    val bundle = Bundle()
-                    bundle.putSerializable("callback", object :ICallBack, Serializable {
-                        override fun response(message: String) {
-                           toast(message)
-                        }
-                    })
-                    dilog.arguments = bundle
-                    dilog.show(fragmentManager, "tag")
                 }
                 R.id.menu_setting -> {
 
@@ -99,7 +109,12 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
                 R.id.menu_share -> {
 
                 }
-                R.id.menu_show_marks -> {
+                R.id.menu_show_comment -> {
+                    comment_list.visibility = View.VISIBLE
+                    val fragment = CommentList()
+                    val transaction = fragmentManager.beginTransaction()
+                    transaction.add(R.id.comment_list, fragment).commit()
+
 
                 }
                 else -> {

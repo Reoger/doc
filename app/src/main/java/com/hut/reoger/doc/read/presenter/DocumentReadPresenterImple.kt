@@ -3,11 +3,18 @@ package com.hut.reoger.doc.read.presenter
 import android.content.Context
 import android.os.Environment
 import android.text.TextUtils
+import com.hut.reoger.doc.App
+import com.hut.reoger.doc.bean.ServiceReply
 import com.hut.reoger.doc.read.view.IReadView
 import com.hut.reoger.doc.read.view.SuperFileView2
+import com.hut.reoger.doc.user.model.LoginInfo
+import com.hut.reoger.doc.utils.log.LogUtils
 import com.hut.reoger.doc.utils.log.TLog
-import com.hut.reoger.doc.utils.netWork.LoadFileModel
+import com.hut.reoger.doc.utils.netWork.*
 import com.hut.reoger.doc.utils.safe.Md5Tool
+import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,14 +28,39 @@ import java.io.InputStream
  * Created by reoger on 2018/3/25.
  * 阅读界面的具体控制逻辑
  */
-class DocumentReadPresenterImple(val context:Context,val mIReadView: IReadView): IDocumentReadPresenter {
+class DocumentReadPresenterImple(val context:RxAppCompatActivity,val mIReadView: IReadView): IDocumentReadPresenter {
 
-    override fun doComment(comments: String, usr: String, doc_id: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun doComment(comments: String, usr: String, doc_id: String,score:Int) {
+        ApiClient.instance.service.insertComment(App.instance.token,usr,comments,score,doc_id)
+                .compose(NetworkScheduler.compose())
+                .bindUntilEvent(context, event = ActivityEvent.DESTROY)
+                .subscribe(object : ApiResponse<ServiceReply>(context!!) {
+                    override fun success(data: ServiceReply) {
+                        //评论添加成功
+                        LogUtils.d("评论添加成功")
+                        mIReadView.commentSuccessful(data)
+                    }
+                    override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
+                        LogUtils.d("评论添加fail $apiErrorModel")
+                        mIReadView.commentFail(apiErrorModel.message)
+                    }
+                })
     }
 
     override fun loadComments(doc_id: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       ApiClient.instance.service.queryCommentByDocId(App.instance.token,doc_id)
+               .compose(NetworkScheduler.compose())
+               .bindUntilEvent(context ,event = ActivityEvent.DESTROY)
+               .subscribe(object :ApiResponse<ServiceReply>(context){
+                   override fun success(data: ServiceReply) {
+                       LogUtils.d("加载评论成功$data.")
+                   }
+
+                   override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
+                       TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                   }
+
+               })
     }
 
     val TAG = "jj"
