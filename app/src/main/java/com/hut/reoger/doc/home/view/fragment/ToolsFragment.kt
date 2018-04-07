@@ -22,8 +22,8 @@ class ToolsFragment : BaseFragment(){
         val fragment = ToolsFragment()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val v: View = inflater!!.inflate(R.layout.fragment_tools,container,false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val v: View = inflater.inflate(R.layout.fragment_tools,container,false)
         return v
     }
 }

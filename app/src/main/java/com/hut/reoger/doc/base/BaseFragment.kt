@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 
 /**
@@ -39,5 +40,7 @@ abstract class BaseFragment : Fragment(){
         bundle?.let { intent.putExtras(bundle) }
         startActivity(intent)
     }
+
+
 
 }

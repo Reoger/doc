@@ -24,5 +24,9 @@ interface IDocumentReadPresenter {
      */
     fun loadComments(doc_id:String)
 
+    /**
+     * 删除评论（通过文档id）
+     */
+    fun deleteComment(comment_id:Int)
 
 }

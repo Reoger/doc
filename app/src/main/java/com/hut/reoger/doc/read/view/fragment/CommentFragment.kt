@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.base.BaseDialogFragment
-import com.hut.reoger.doc.read.`interface`.ICallBack
+import com.hut.reoger.doc.read.`interface`.IDialogFragmentCallback
 import kotlinx.android.synthetic.main.fragment_dialog_comment.*
 
 /**
@@ -30,10 +30,10 @@ class CommentFragment : BaseDialogFragment(){
     }
 
 
-    private var callback :ICallBack ?=null
+    private var callback :IDialogFragmentCallback ?=null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-         callback = arguments["callback"] as ICallBack
+         callback = arguments["callback"] as IDialogFragmentCallback
         val view:View = inflater.inflate(R.layout.fragment_dialog_comment,container)
         initView(view)
         return view

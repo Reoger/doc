@@ -5,6 +5,7 @@ import android.os.Environment
 import android.text.TextUtils
 import com.hut.reoger.doc.App
 import com.hut.reoger.doc.bean.ServiceReply
+import com.hut.reoger.doc.read.bean.CommentsByDoc
 import com.hut.reoger.doc.read.view.IReadView
 import com.hut.reoger.doc.read.view.SuperFileView2
 import com.hut.reoger.doc.user.model.LoginInfo
@@ -30,11 +31,31 @@ import java.io.InputStream
  */
 class DocumentReadPresenterImple(val context:RxAppCompatActivity,val mIReadView: IReadView): IDocumentReadPresenter {
 
+    /**
+     * 删除文档
+     */
+    override fun deleteComment(comment_id: Int) {
+        ApiClient.instance.service.deletComment(App.instance.token,comment_id)
+                .compose(NetworkScheduler.compose())
+                .bindUntilEvent(context, event = ActivityEvent.DESTROY)
+                .subscribe(object : ApiResponse<ServiceReply>(context) {
+                    override fun success(data: ServiceReply) {
+                        //评论添加成功
+                        LogUtils.d("评论0删除成功")
+                        mIReadView.deleteCommentSuccessful()
+                    }
+                    override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
+                        LogUtils.d("评论删除fail $apiErrorModel")
+                        mIReadView.deleteCommentFail(apiErrorModel.message)
+                    }
+                })
+    }
+
     override fun doComment(comments: String, usr: String, doc_id: String,score:Int) {
         ApiClient.instance.service.insertComment(App.instance.token,usr,comments,score,doc_id)
                 .compose(NetworkScheduler.compose())
                 .bindUntilEvent(context, event = ActivityEvent.DESTROY)
-                .subscribe(object : ApiResponse<ServiceReply>(context!!) {
+                .subscribe(object : ApiResponse<ServiceReply>(context) {
                     override fun success(data: ServiceReply) {
                         //评论添加成功
                         LogUtils.d("评论添加成功")
@@ -51,9 +72,12 @@ class DocumentReadPresenterImple(val context:RxAppCompatActivity,val mIReadView:
        ApiClient.instance.service.queryCommentByDocId(App.instance.token,doc_id)
                .compose(NetworkScheduler.compose())
                .bindUntilEvent(context ,event = ActivityEvent.DESTROY)
-               .subscribe(object :ApiResponse<ServiceReply>(context){
-                   override fun success(data: ServiceReply) {
-                       LogUtils.d("加载评论成功$data.")
+               .subscribe(object :ApiResponse<CommentsByDoc>(context){
+                   override fun success(data: CommentsByDoc) {
+                       LogUtils.d("加载评论成功$data")
+                       if(data.code == 2000){
+                            mIReadView.loadCommentSuccessful(data)
+                       }
                    }
 
                    override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {

@@ -3,6 +3,7 @@ package com.hut.reoger.doc.utils.netWork
 import android.content.Context
 import com.example.cm.mytestdemo.utils.loadingUtils.LoadDialog
 import com.google.gson.Gson
+import com.hut.reoger.doc.utils.log.LogUtils
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import retrofit2.HttpException
@@ -45,7 +46,7 @@ abstract class ApiResponse<T>(private val context: Context) : Observer<T> {
             failure(e.code(), apiErrorModel)
             return
         }
-
+        LogUtils.d("具体的错误信息$e")
         val apiErrorType: ApiErrorType = when (e) {  //发送网络问题或其它未知问题，请根据实际情况进行修改
             is UnknownHostException -> ApiErrorType.NETWORK_NOT_CONNECT
             is ConnectException -> ApiErrorType.NETWORK_NOT_CONNECT
