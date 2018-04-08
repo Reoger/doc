@@ -6,6 +6,7 @@ import com.hut.reoger.doc.R
 
 /**
  * Created by CM on 2018/1/25.
+ *
  */
 enum class ApiErrorType(val code: Int, @param: StringRes private val messageId: Int) {
     //根据实际情况进行增删

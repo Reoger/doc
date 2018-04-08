@@ -11,10 +11,13 @@ import android.database.sqlite.SQLiteOpenHelper
  */
 class DBHelper: SQLiteOpenHelper{
 
-    private val SQL_CREATE = "create table read_history(_id integer primary key autoincrement,\n" +
+    private val SQL_CREATE_HISTORY = "create table read_history(_id integer primary key autoincrement,\n" +
             "doc_index text,doc_type text,doc_id text,doc_score text,doc_down_link text,doc_update_time INTEGER,\n" +
             "doc_size long,doc_author text,doc_name text,doc_time integer,doc_content text)"
-    private  val  SQL_DROP = "drop table if exists read_history"
+    private val SQL_CREATE_MARKS = "create table marks(_id integer primary key autoincrement,"+
+            "doc_id text,doc_name text,mark_time integer,user_id integer)"
+    private  val  SQL_DROP_HISTORY = "drop table if exists read_history"
+    private  val  SQL_DROP_MARKS = "drop table if exists read_history"
 
     companion object {
          const val DB_NAME   :String = "history.db"
@@ -30,12 +33,16 @@ class DBHelper: SQLiteOpenHelper{
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-       db?.execSQL(SQL_CREATE)
+       db?.execSQL(SQL_CREATE_HISTORY)
+       db?.execSQL(SQL_CREATE_MARKS)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL(SQL_DROP)
-        db?.execSQL(SQL_CREATE)
+        db?.execSQL(SQL_DROP_HISTORY)
+        db?.execSQL(SQL_DROP_MARKS)
+
+        db?.execSQL(SQL_CREATE_HISTORY)
+        db?.execSQL(SQL_CREATE_MARKS)
     }
 
 }

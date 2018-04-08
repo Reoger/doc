@@ -12,7 +12,10 @@ import java.util.ArrayList
 /**
  * Created by reoger on 2018/3/25.
  * 针对历史记录数据库的增删改查
+ *
  */
+
+//todo 需要添加usrid，便于多用户的场景
 class HistoryDbImpl :IHistoryDao{
 
 
@@ -88,6 +91,7 @@ class HistoryDbImpl :IHistoryDao{
                     )
             list.add(item)
         }
+        cursor.close()
         return list
     }
 
@@ -107,6 +111,7 @@ class HistoryDbImpl :IHistoryDao{
             )
             list.add(item)
         }
+        cursor.close()
         return list
     }
 
