@@ -9,7 +9,7 @@ import java.util.ArrayList
  * Created by reoger on 2018/4/8.
  * mark表的操作类
  */
-class MarkDbImpl :IMarkDao{
+class MarkDbImpl : IMarkDao {
 
     private var mDBHelper: DBHelper? = null
 
@@ -22,31 +22,33 @@ class MarkDbImpl :IMarkDao{
     }
 
     @Synchronized
-    override fun insertMark(marks: MarksBean) {
+    override fun insertMark(marks: MarksBean): Boolean {
         val db = mDBHelper?.writableDatabase
         val values = ContentValues()
-        values.put("doc_id",marks.doc_id)
-        values.put("doc_name",marks.doc_name)
-        values.put("mark_time",marks.mark_time)
-        values.put("user_id",marks.user_id)
-        db?.insert(MARK_TABLE_NAME,null,values)
+        values.put("doc_id", marks.doc_id)
+        values.put("doc_name", marks.doc_name)
+        values.put("mark_time", marks.mark_time)
+        values.put("user_id", marks.user_id)
+        var res = db?.insert(MARK_TABLE_NAME, null, values) ?: -1
+        return res != -1L
     }
 
     @Synchronized
-    override fun deleteMark(marks: MarksBean) {
+    override fun deleteMark(doc_id: String): Boolean {
         val db = mDBHelper?.writableDatabase
-        db?.delete(MARK_TABLE_NAME,"where doc_id = ", arrayOf(marks.doc_id))
+        val res: Int = db?.delete(MARK_TABLE_NAME, "where doc_id = ", arrayOf(doc_id)) ?: 0
+        return res > 0
     }
 
     override fun getScollData(offest: Int, maxResult: Int): List<MarksBean> {
         val list = ArrayList<MarksBean>()
         val db = mDBHelper?.readableDatabase
-        val cursor = db?.rawQuery("select * from marks order by marks_time desc  limit ?,?", arrayOf(offest.toString(),maxResult.toString()))
+        val cursor = db?.rawQuery("select * from marks order by marks_time desc  limit ?,?", arrayOf(offest.toString(), maxResult.toString()))
         while (cursor!!.moveToNext()) {
-           val item =  MarksBean( cursor.getInt(cursor.getColumnIndex("user_id")),
+            val item = MarksBean(cursor.getString(cursor.getColumnIndex("user_id")),
                     cursor.getString(cursor.getColumnIndex("doc_id")),
                     cursor.getString(cursor.getColumnIndex("doc_name")),
-                    cursor.getInt(cursor.getColumnIndex("mark_time")))
+                    cursor.getLong(cursor.getColumnIndex("mark_time")))
             list.add(item)
         }
         cursor.close()
@@ -60,7 +62,7 @@ class MarkDbImpl :IMarkDao{
         val db = mDBHelper?.readableDatabase
         val cursor = db?.rawQuery("select * from marks where doc_id =?", arrayOf(doc_id))
         cursor.use { cursor ->
-            while (cursor!=null && cursor.moveToNext()){
+            while (cursor != null && cursor.moveToNext()) {
                 return true
             }
             return false

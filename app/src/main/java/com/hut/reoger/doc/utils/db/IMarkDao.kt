@@ -11,12 +11,12 @@ interface IMarkDao{
     /**
      * 插入收藏文档
      */
-    fun insertMark(marks:MarksBean)
+    fun insertMark(marks:MarksBean):Boolean
 
     /**
      * 删除收藏文档
      */
-    fun deleteMark(marks:MarksBean)
+    fun deleteMark(doc_id: String):Boolean
 
     /**
      * 查询收藏的文档

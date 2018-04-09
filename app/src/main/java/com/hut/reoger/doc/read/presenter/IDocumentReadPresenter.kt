@@ -29,4 +29,18 @@ interface IDocumentReadPresenter {
      */
     fun deleteComment(comment_id:Int)
 
+    /**
+     * 评论当前文档是否被收藏
+     */
+    fun isCurrentDocMarked(doc_id:String):Boolean
+
+    /**
+     * 取消收藏文档
+     */
+    fun cancelDocMarked(doc_id:String):Boolean
+
+    /**
+     * 收藏文档
+     */
+    fun markDoc(doc_id:String,user_id:String,doc_name:String):Boolean
 }

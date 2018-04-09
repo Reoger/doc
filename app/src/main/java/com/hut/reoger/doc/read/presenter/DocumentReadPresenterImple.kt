@@ -1,14 +1,15 @@
 package com.hut.reoger.doc.read.presenter
 
-import android.content.Context
 import android.os.Environment
 import android.text.TextUtils
 import com.hut.reoger.doc.App
+import com.hut.reoger.doc.bean.MarksBean
 import com.hut.reoger.doc.bean.ServiceReply
 import com.hut.reoger.doc.read.bean.CommentsByDoc
 import com.hut.reoger.doc.read.view.IReadView
 import com.hut.reoger.doc.read.view.SuperFileView2
-import com.hut.reoger.doc.user.model.LoginInfo
+import com.hut.reoger.doc.utils.db.IMarkDao
+import com.hut.reoger.doc.utils.db.MarkDbImpl
 import com.hut.reoger.doc.utils.log.LogUtils
 import com.hut.reoger.doc.utils.log.TLog
 import com.hut.reoger.doc.utils.netWork.*
@@ -29,13 +30,19 @@ import java.io.InputStream
  * Created by reoger on 2018/3/25.
  * 阅读界面的具体控制逻辑
  */
-class DocumentReadPresenterImple(val context:RxAppCompatActivity,val mIReadView: IReadView): IDocumentReadPresenter {
+class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadView: IReadView) : IDocumentReadPresenter {
+
+    private var markDbImpl: IMarkDao? = null
+
+    init {
+        markDbImpl = MarkDbImpl(context)
+    }
 
     /**
      * 删除文档
      */
     override fun deleteComment(comment_id: Int) {
-        ApiClient.instance.service.deletComment(App.instance.token,comment_id)
+        ApiClient.instance.service.deletComment(App.instance.token, comment_id)
                 .compose(NetworkScheduler.compose())
                 .bindUntilEvent(context, event = ActivityEvent.DESTROY)
                 .subscribe(object : ApiResponse<ServiceReply>(context) {
@@ -44,6 +51,7 @@ class DocumentReadPresenterImple(val context:RxAppCompatActivity,val mIReadView:
                         LogUtils.d("评论0删除成功")
                         mIReadView.deleteCommentSuccessful()
                     }
+
                     override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
                         LogUtils.d("评论删除fail $apiErrorModel")
                         mIReadView.deleteCommentFail(apiErrorModel.message)
@@ -51,8 +59,8 @@ class DocumentReadPresenterImple(val context:RxAppCompatActivity,val mIReadView:
                 })
     }
 
-    override fun doComment(comments: String, usr: String, doc_id: String,score:Int) {
-        ApiClient.instance.service.insertComment(App.instance.token,usr,comments,score,doc_id)
+    override fun doComment(comments: String, usr: String, doc_id: String, score: Int) {
+        ApiClient.instance.service.insertComment(App.instance.token, usr, comments, score, doc_id)
                 .compose(NetworkScheduler.compose())
                 .bindUntilEvent(context, event = ActivityEvent.DESTROY)
                 .subscribe(object : ApiResponse<ServiceReply>(context) {
@@ -61,6 +69,7 @@ class DocumentReadPresenterImple(val context:RxAppCompatActivity,val mIReadView:
                         LogUtils.d("评论添加成功")
                         mIReadView.commentSuccessful(data)
                     }
+
                     override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
                         LogUtils.d("评论添加fail $apiErrorModel")
                         mIReadView.commentFail(apiErrorModel.message)
@@ -68,23 +77,51 @@ class DocumentReadPresenterImple(val context:RxAppCompatActivity,val mIReadView:
                 })
     }
 
+    override fun isCurrentDocMarked(doc_id: String): Boolean {
+        return markDbImpl?.isMarks(doc_id) ?: false
+    }
+
+    override fun cancelDocMarked(doc_id: String): Boolean {
+
+        if (isCurrentDocMarked(doc_id)) {
+            return markDbImpl?.deleteMark(doc_id) ?: true
+        }
+        return false
+    }
+
+    override fun markDoc(doc_id:String,user_id:String,doc_name:String): Boolean {
+        if (doc_id.isEmpty()||doc_name.isEmpty())
+            return false
+        if (doc_name.isEmpty()){
+            //跳转到登录界面
+            return false
+        }
+        return if (isCurrentDocMarked(doc_id)) {
+            false
+        } else {
+            val bean = MarksBean(App.instance.userId, doc_id, doc_name, System.currentTimeMillis())
+            markDbImpl?.insertMark(bean) ?: false
+        }
+
+    }
+
     override fun loadComments(doc_id: String) {
-       ApiClient.instance.service.queryCommentByDocId(App.instance.token,doc_id)
-               .compose(NetworkScheduler.compose())
-               .bindUntilEvent(context ,event = ActivityEvent.DESTROY)
-               .subscribe(object :ApiResponse<CommentsByDoc>(context){
-                   override fun success(data: CommentsByDoc) {
-                       LogUtils.d("加载评论成功$data")
-                       if(data.code == 2000){
+        ApiClient.instance.service.queryCommentByDocId(App.instance.token, doc_id)
+                .compose(NetworkScheduler.compose())
+                .bindUntilEvent(context, event = ActivityEvent.DESTROY)
+                .subscribe(object : ApiResponse<CommentsByDoc>(context) {
+                    override fun success(data: CommentsByDoc) {
+                        LogUtils.d("加载评论成功$data")
+                        if (data.code == 2000) {
                             mIReadView.loadCommentSuccessful(data)
-                       }
-                   }
+                        }
+                    }
 
-                   override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
-                       TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                   }
+                    override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
 
-               })
+                })
     }
 
     val TAG = "jj"
