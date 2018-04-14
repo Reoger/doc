@@ -17,7 +17,7 @@ class DBHelper: SQLiteOpenHelper{
     private val SQL_CREATE_MARKS = "create table marks(_id integer primary key autoincrement,"+
             "doc_id text,doc_name text,mark_time integer,user_id integer)"
     private  val  SQL_DROP_HISTORY = "drop table if exists read_history"
-    private  val  SQL_DROP_MARKS = "drop table if exists read_history"
+    private  val  SQL_DROP_MARKS = "drop table if exists marks"
 
     companion object {
          const val DB_NAME   :String = "history.db"

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import com.hut.reoger.doc.App
 import com.hut.reoger.doc.base.BaseActivity
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.bean.ServiceReply
@@ -14,6 +15,7 @@ import com.hut.reoger.doc.read.presenter.DocumentReadPresenterImple
 import com.hut.reoger.doc.read.presenter.IDocumentReadPresenter
 import com.hut.reoger.doc.read.view.fragment.CommentFragment
 import com.hut.reoger.doc.read.view.fragment.CommentListFragment
+import com.hut.reoger.doc.utils.aop.networkState.AspectNetworkAnnotation
 import com.hut.reoger.doc.utils.log.LogUtils
 import com.hut.reoger.doc.utils.log.TLog
 import kotlinx.android.synthetic.main.layout_doc.*
@@ -32,11 +34,14 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
 
     private var mSuperFileView: SuperFileView2? = null
 
+
     companion object {
 
         const val READ_ONLINE = "read_activity"
         const val COMMENT_FRAGMENT = "comment_fragment"
         const val COMMENT_LIST_DATA = "data_for_comment_list"
+
+        const val DOC_ID  = "1234567890"
     }
     private var mReadPresenter: IDocumentReadPresenter? = null
 
@@ -146,10 +151,16 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
                     diloag.show(fragmentManager, "tag")
                 }
                 R.id.menu_mark -> {
-                    toast("点击了标记")
+                    if(mReadPresenter?.isCurrentDocMarked(DOC_ID)==true){
+                        toast("当前的文章没有已经被,现在取消标记")
+                        mReadPresenter?.cancelDocMarked(DOC_ID)
+                    }else{
+                        toast("当前的文章没有被标记,现在标记了")
+                        mReadPresenter?.markDoc(doc_name = "文章标题",doc_id = DOC_ID,user_id = App.instance.userId)
+                    }
                 }
                 R.id.menu_about -> {
-
+                    testAopNetWork()
                 }
                 R.id.menu_setting -> {
 
@@ -177,6 +188,10 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
         })
     }
 
+    @AspectNetworkAnnotation()
+    fun testAopNetWork(){
+        toast("测试网络状态")
+    }
 
     override fun onRestart() {
         super.onRestart()

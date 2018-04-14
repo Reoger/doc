@@ -40,6 +40,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
 
+        <activity android:name=".home.testActivity"/>
+
     </application>
 
 </manifest>

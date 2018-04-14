@@ -51,7 +51,7 @@ class HistoryDbImpl :IHistoryDao{
     @Synchronized
     override fun deleteReadHistory(_id: String) {
         val db = mDBHelper?.writableDatabase
-        db?.delete(HISTORY_TABLE_NAME,"where doc_id = ", arrayOf(_id))
+        db?.delete(HISTORY_TABLE_NAME," doc_id = ?", arrayOf(_id))
     }
 
     @Synchronized

@@ -30,13 +30,15 @@ class MarkDbImpl : IMarkDao {
         values.put("mark_time", marks.mark_time)
         values.put("user_id", marks.user_id)
         var res = db?.insert(MARK_TABLE_NAME, null, values) ?: -1
+        db?.close()
         return res != -1L
     }
 
     @Synchronized
     override fun deleteMark(doc_id: String): Boolean {
         val db = mDBHelper?.writableDatabase
-        val res: Int = db?.delete(MARK_TABLE_NAME, "where doc_id = ", arrayOf(doc_id)) ?: 0
+        val res: Int = db?.delete(MARK_TABLE_NAME, "doc_id = ?", arrayOf(doc_id)) ?: 0
+        db?.close()
         return res > 0
     }
 
@@ -52,6 +54,7 @@ class MarkDbImpl : IMarkDao {
             list.add(item)
         }
         cursor.close()
+        db?.close()
         return list
     }
 

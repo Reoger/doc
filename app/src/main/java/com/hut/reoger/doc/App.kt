@@ -2,6 +2,7 @@ package com.hut.reoger.doc
 
 import android.app.Activity
 import android.app.Application
+import com.firefly1126.permissionaspect.PermissionCheckSDK
 import com.hut.reoger.doc.utils.exception.ExceptionHandler
 import com.hut.reoger.doc.utils.loadingUtils.SlidingInAndOutDialogFragment
 import com.hut.reoger.doc.utils.netWork.ApiClient
@@ -21,6 +22,7 @@ class App : Application() {
         super.onCreate()
         ApiClient.instance.init()
 //        ExceptionHandler.instance.initConfig(this)
+        PermissionCheckSDK.init(this@App)
     }
 
     var user: String? = null
