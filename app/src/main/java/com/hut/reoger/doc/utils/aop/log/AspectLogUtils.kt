@@ -43,7 +43,6 @@ class AspectLogUtils {
     }
 
     companion object {
-
         internal val TAG = "TAG"
     }
 }

@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
    <TextView
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
@@ -20,6 +18,7 @@
        android:text="我的离线"/>
 
     <TextView
+        android:id="@+id/doc_mark_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -28,6 +27,7 @@
         android:textSize="11sp"
         android:drawableStart="@mipmap/ic_document"
         android:text="我的收藏"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

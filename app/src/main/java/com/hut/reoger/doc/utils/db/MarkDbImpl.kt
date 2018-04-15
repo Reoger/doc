@@ -45,7 +45,7 @@ class MarkDbImpl : IMarkDao {
     override fun getScollData(offest: Int, maxResult: Int): List<MarksBean> {
         val list = ArrayList<MarksBean>()
         val db = mDBHelper?.readableDatabase
-        val cursor = db?.rawQuery("select * from marks order by marks_time desc  limit ?,?", arrayOf(offest.toString(), maxResult.toString()))
+        val cursor = db?.rawQuery("select * from marks order by mark_time desc  limit ?,?", arrayOf(offest.toString(), maxResult.toString()))
         while (cursor!!.moveToNext()) {
             val item = MarksBean(cursor.getString(cursor.getColumnIndex("user_id")),
                     cursor.getString(cursor.getColumnIndex("doc_id")),

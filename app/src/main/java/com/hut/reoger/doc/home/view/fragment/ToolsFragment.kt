@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.cm.mytestdemo.base.BaseFragment
+import com.hut.reoger.doc.base.BaseFragment
 import com.hut.reoger.doc.R
 
 /**

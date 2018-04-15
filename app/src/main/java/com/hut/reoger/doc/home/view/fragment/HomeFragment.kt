@@ -1,6 +1,5 @@
 package com.hut.reoger.doc.home.view
 
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -13,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
-import com.example.cm.mytestdemo.base.BaseFragment
+import com.hut.reoger.doc.base.BaseFragment
 import com.example.cm.mytestdemo.home.view.fragment.IHomeFragmentView
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.home.adapter.HistoryAdapter
@@ -131,7 +130,6 @@ class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListe
 
 
         a?.setOnQueryTextFocusChangeListener { view, b ->
-            log("总的打印店什么"+view.toString()+" : "+b)
             when(b){
                 true->{
                     linearMain?.visibility = View.GONE

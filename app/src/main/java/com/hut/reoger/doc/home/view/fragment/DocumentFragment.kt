@@ -5,7 +5,8 @@ import android.support.design.widget.FloatingActionButton
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.cm.mytestdemo.base.BaseFragment
+import android.widget.TextView
+import com.hut.reoger.doc.base.BaseFragment
 import com.hut.reoger.doc.App
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.uploader.view.UploaderActivity
@@ -41,7 +42,10 @@ class DocumentFragment : BaseFragment(){
             }else{
                 openActivity(UploaderActivity::class.java)
             }
-
         })
+        view.findViewById<TextView>(R.id.doc_mark_tv).setOnClickListener({
+            openActivity(MarkDocActivity::class.java)
+        })
+
     }
 }

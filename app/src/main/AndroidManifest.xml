@@ -39,6 +39,8 @@
         <activity android:name=".about.view.AboutActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity android:name=".home.view.MarkDocActivity"/>
+
 
         <activity android:name=".home.testActivity"/>
 
