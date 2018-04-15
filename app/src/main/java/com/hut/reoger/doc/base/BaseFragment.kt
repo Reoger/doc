@@ -10,12 +10,13 @@ import android.widget.Toast
 
 /**
  * Created by CM on 2018/2/1.
+ *
  */
 abstract class BaseFragment : Fragment() {
 
     //基础的fragment
-    fun taost(str: String) {
-        Toast.makeText(context, str, Toast.LENGTH_SHORT).show()
+    fun toast(str: String) {
+        Toast.makeText(activity, str, Toast.LENGTH_SHORT).show()
     }
 
 
@@ -34,6 +35,4 @@ abstract class BaseFragment : Fragment() {
         bundle?.let { intent.putExtras(bundle) }
         startActivity(intent)
     }
-
-
 }

@@ -42,7 +42,7 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
      * 删除文档
      */
     override fun deleteComment(comment_id: Int) {
-        ApiClient.instance.service.deletComment(App.instance.token, comment_id)
+        ApiClient.instance.service.deleteComment(App.instance.token, comment_id)
                 .compose(NetworkScheduler.compose())
                 .bindUntilEvent(context, event = ActivityEvent.DESTROY)
                 .subscribe(object : ApiResponse<ServiceReply>(context) {

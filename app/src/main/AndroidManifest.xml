@@ -41,6 +41,8 @@
 
         <activity android:name=".home.view.MarkDocActivity"/>
 
+        <activity android:name=".home.view.CommentActivity"/>
+
 
         <activity android:name=".home.testActivity"/>
 

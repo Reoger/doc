@@ -17,21 +17,27 @@ import com.hut.reoger.doc.read.bean.DataItem
  */
 class CommentAdapter(val mContext:Context) :RecyclerView.Adapter<CommentAdapter.ItemViewHolder>(){
 
-    private var data:List<DataItem>?=null
+    private var data:MutableList<DataItem>?=null
 
     private var listener:OnRemoveClickListener?=null
 
 
      fun setData(data: List<DataItem>){
-         this.data = data
+         this.data = data as MutableList<DataItem>
          notifyDataSetChanged()
      }
 
     fun updataData(data: List<DataItem>,pos:Int){
         if (data!=null && data.isNotEmpty()){
-            this.data = data
+            this.data = data as MutableList<DataItem>
             notifyItemRemoved(pos)
         }
+    }
+
+    fun deleteData(position: Int){
+        data?.removeAt(position)
+        notifyItemRemoved(position)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ItemViewHolder {

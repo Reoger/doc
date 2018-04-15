@@ -47,5 +47,8 @@ class DocumentFragment : BaseFragment(){
             openActivity(MarkDocActivity::class.java)
         })
 
+        view.findViewById<TextView>(R.id.doc_comment_tv).setOnClickListener({
+            openActivity(CommentActivity::class.java)
+        })
     }
 }

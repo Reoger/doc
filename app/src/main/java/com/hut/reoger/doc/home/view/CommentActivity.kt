@@ -1,24 +1,30 @@
 package com.hut.reoger.doc.home.view
 
+import android.os.Bundle
 import com.hut.reoger.doc.R
-import com.hut.reoger.doc.base.BaseActivity
+import com.hut.reoger.doc.base.BaseActivityWithMainFragment
+import com.hut.reoger.doc.home.view.fragment.CommentDocFragment
 
 /**
  * Created by reoger on 2018/4/15.
+ *
  */
-class CommentActivity :BaseActivity(){
+class CommentActivity : BaseActivityWithMainFragment(){
 
-    override fun setContentView(layoutResID: Int) {
-        super.setContentView(layoutResID)
-        setContentView(R.layout.activity_main)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_fragment_contet)
     }
+
 
     override fun setActionBar() {
         setActivityTitle("我的评论")
     }
 
     override fun initView() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+         fragment  = CommentDocFragment.getInstance()
+        fragmentManager.beginTransaction().replace(R.id.fragment_main,fragment).commit()
     }
 
 }

@@ -3,7 +3,6 @@ package com.hut.reoger.doc.utils.netWork
 
 import com.hut.reoger.doc.bean.Repo
 import com.hut.reoger.doc.bean.ServiceReply
-import com.hut.reoger.doc.home.model.ResultBySearchContent
 import com.hut.reoger.doc.read.bean.CommentsByDoc
 import com.hut.reoger.doc.search.bean.ResultAsSearchBean
 import com.hut.reoger.doc.search.bean.SearchByContentBean
@@ -53,11 +52,11 @@ interface GitHubService{
 
     @FormUrlEncoded
     @POST("userMaster/api/deleteComment.php")
-    fun deletComment(@Field("token") token:String, @Field("comment_id") comment_id:Int):Observable<ServiceReply>
+    fun deleteComment(@Field("token") token:String, @Field("comment_id") comment_id:Int):Observable<ServiceReply>
 
     @FormUrlEncoded
-    @POST("userMaster/api/queryCommentByUser.php")
-    fun queryCommentByUserID(@Field("token") token:String):Observable<ServiceReply>
+    @POST("userMaster/api/queryCommentsByUser.php")
+    fun queryCommentByUserID(@Field("token") token:String):Observable<CommentsByDoc>
 
     @FormUrlEncoded
     @POST("userMaster/api/queryCommentsByDoc.php")

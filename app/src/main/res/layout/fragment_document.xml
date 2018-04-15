@@ -38,6 +38,7 @@
         android:drawableStart="@mipmap/ic_document"
         android:text="本地文档"/>
     <TextView
+        android:id="@+id/doc_comment_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
