@@ -1,4 +1,5 @@
-package com.hut.reoger.doc.home.view
+package com.hut.reoger.doc.home.view.fragment
+
 
 import android.os.Build
 import android.os.Bundle
@@ -36,7 +37,9 @@ import com.zhy.view.flowlayout.TagFlowLayout
  */
 
 class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListener, IHomeFragmentView {
-
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_home
+    }
 
 
     var presenter: IHomeFragmentPresenter?= null
@@ -76,40 +79,12 @@ class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListe
         return false
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater?.inflate(R.layout.fragment_home, container, false)!!
-
-        presenter = HomeFragmentPresenter(view.context,this)
-
-        initView(view)
 
 
-        val rr= listOf("牙签","猫","小可爱")
-        val mFlowLayout = view.findViewById<TagFlowLayout>(R.id.id_flowlayout)
 
-        mFlowLayout.adapter = object : TagAdapter<String>(rr) {
-            override fun getView(parent: FlowLayout, position: Int, s: String): View {
-                val tv = inflater.inflate(R.layout.tv,
-                        mFlowLayout, false) as TextView
-                tv.text = s
-                return tv
-            }
-        }
 
-        mFlowLayout.setOnTagClickListener({ _, position, _ ->
-            TLog.d("TAG", "这里显示的是主要的$position")
-            textView?.text = rr[position]
-            presenter?.doSearch(rr[position])
-            true
-        })
-
-        return view
-    }
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun initView(v: View) {
-
+     override fun initView(v: View) {
+        presenter = HomeFragmentPresenter(v.context,this)
         linearMain = v.findViewById(R.id.home_search_show_linear)
         linearSearch = v.findViewById(R.id.search_show_linear)
 
@@ -168,6 +143,25 @@ class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListe
                 val url = "http://www.hrssgz.gov.cn/bgxz/sydwrybgxz/201101/P020110110748901718161.doc"
                 openActivity(DocumentReaderActivity::class.java, DocumentReaderActivity.READ_ONLINE,url)
             }
+        })
+
+        val rr= listOf("牙签","猫","小可爱")
+        val mFlowLayout = v.findViewById<TagFlowLayout>(R.id.id_flowlayout)
+
+        mFlowLayout.adapter = object : TagAdapter<String>(rr) {
+            override fun getView(parent: FlowLayout, position: Int, s: String): View {
+                val tv = minflater?.inflate(R.layout.tv,
+                        mFlowLayout, false) as TextView
+                tv.text = s
+                return tv
+            }
+        }
+
+        mFlowLayout.setOnTagClickListener({ _, position, _ ->
+            TLog.d("TAG", "这里显示的是主要的$position")
+            textView?.text = rr[position]
+            presenter?.doSearch(rr[position])
+            true
         })
 
     }

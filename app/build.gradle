@@ -136,4 +136,7 @@ dependencies {
     //权限库的以来
     implementation 'com.firefly1126.permissionaspect:permissionaspect:1.0.1'
 
+    //二维码扫描 https://github.com/mylhyl/Android-Zxing
+    implementation  'com.mylhyl:zxingscanner:2.1.1'
+
 }

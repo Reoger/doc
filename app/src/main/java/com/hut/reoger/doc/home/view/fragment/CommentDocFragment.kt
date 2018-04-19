@@ -3,9 +3,7 @@ package com.hut.reoger.doc.home.view.fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import com.hut.reoger.doc.App
 import com.hut.reoger.doc.R
@@ -16,13 +14,16 @@ import com.hut.reoger.doc.read.adapter.CommentAdapter
 import com.hut.reoger.doc.read.bean.CommentsByDoc
 import com.hut.reoger.doc.read.bean.DataItem
 import com.hut.reoger.doc.search.adapter.ItemClickSupport
-import com.hut.reoger.doc.utils.log.LogUtils
 
 /**
  * Created by reoger on 2018/4/15.
  */
 
 class CommentDocFragment : BaseFragment(), ICommentDocView {
+
+    override fun getLayoutId(): Int {
+       return R.layout.fragment_mark_list
+    }
 
 
     object InnerClass {
@@ -48,15 +49,11 @@ class CommentDocFragment : BaseFragment(), ICommentDocView {
         presenter?.getMarkListByUsrId(App.instance.token)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater?.inflate(R.layout.fragment_mark_list, container, false)
-        initView(view!!)
-        return view
-    }
 
-    private fun initView(view: View) {
-        val recyeler = view.findViewById<RecyclerView>(R.id.recycler_mark_fragment)
-        notice_Date = view.findViewById<TextView>(R.id.tv_mark_fragment_none)
+
+    override fun initView(mRootView: View) {
+        val recyeler = mRootView.findViewById<RecyclerView>(R.id.recycler_mark_fragment)
+        notice_Date = mRootView.findViewById<TextView>(R.id.tv_mark_fragment_none)
 
         recyeler.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         markAdapter = CommentAdapter(activity)
@@ -71,8 +68,6 @@ class CommentDocFragment : BaseFragment(), ICommentDocView {
                 toast("点击了$position")
             }
         })
-
-
     }
 
     override fun loadCommentSuccessful(data: CommentsByDoc?) {

@@ -28,7 +28,7 @@ class CommentAdapter(val mContext:Context) :RecyclerView.Adapter<CommentAdapter.
      }
 
     fun updataData(data: List<DataItem>,pos:Int){
-        if (data!=null && data.isNotEmpty()){
+        if (data.isNotEmpty()){
             this.data = data as MutableList<DataItem>
             notifyItemRemoved(pos)
         }
@@ -56,8 +56,8 @@ class CommentAdapter(val mContext:Context) :RecyclerView.Adapter<CommentAdapter.
             holder.author?.text = item.commentUserName
             holder.time?.text = item.commentTime
             if (item.commentUserId== App.instance.userId){
-                holder?.delete?.visibility = View.VISIBLE
-                holder?.delete?.setOnClickListener({
+                holder.delete?.visibility = View.VISIBLE
+                holder.delete?.setOnClickListener({
                     if (this.listener != null)
                         this.listener!!.onRemoveClickListener(position)
                 })

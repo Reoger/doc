@@ -26,15 +26,15 @@ class HistoryAdapter(val context:Context?) :  RecyclerView.Adapter<HistoryAdapte
 
     override fun onBindViewHolder(holder: ItemHolder?, position: Int) {
         if (historyDate != null) {
-            val item : HitsItem =historyDate!![position]
-            holder?.title?.text = item?.Source.name  //设置标题
-            var contents =  item?.highlight.content.toString()
+            val item : HitsItem = historyDate!![position]
+            holder?.title?.text = item.Source.name  //设置标题
+            var contents =  item.highlight.content.toString()
             contents.removeSuffix("/r")
             contents.removeSuffix("/n")
 //            contents.replace("em","strong") //暂时先不管，后面在进行修改。
             holder?.content?.text = Html.fromHtml(contents) //设置内容
-            holder?.author?.text = item?.Source.author   //作者
-            holder?.time?.text = item?.Source.time.toString() //时间
+            holder?.author?.text = item.Source.author   //作者
+            holder?.time?.text = item.Source.time.toString() //时间
 
         }
     }

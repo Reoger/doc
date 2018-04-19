@@ -27,6 +27,7 @@ import com.hut.reoger.doc.utils.netWork.NetworkScheduler
 
 class CommentListFragment : BaseFragment(){
 
+
     private  var adapter :CommentAdapter?=null
 
     private var  data:CommentsByDoc?=null
@@ -59,13 +60,13 @@ class CommentListFragment : BaseFragment(){
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater?.inflate(R.layout.fragment_comment,container,false)
-        initView(v)
-        return v
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_comment
     }
 
-    private fun initView(v: View?) {
+
+
+    override fun initView(v: View) {
         val recycler: RecyclerView? = v?.findViewById(R.id.recycler_comments)
         val manager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         recycler?.layoutManager = manager

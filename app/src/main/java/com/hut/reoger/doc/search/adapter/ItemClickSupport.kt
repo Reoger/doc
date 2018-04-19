@@ -82,7 +82,7 @@ class ItemClickSupport private constructor(private val mRecyclerView: RecyclerVi
 
         fun removeFrom(view: RecyclerView): ItemClickSupport? {
             val support = view.getTag(R.id.item_click_support) as ItemClickSupport
-            support?.detach(view)
+            support.detach(view)
             return support
         }
     }

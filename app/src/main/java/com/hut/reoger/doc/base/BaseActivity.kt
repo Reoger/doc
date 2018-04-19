@@ -206,9 +206,6 @@ abstract class BaseActivity : RxAppCompatActivity() {
         LoadDialog.show(this)
     }
 
-    fun startLoad(str: String){
-
-    }
 
     fun stopLoad(){
 //        dialog?.let {

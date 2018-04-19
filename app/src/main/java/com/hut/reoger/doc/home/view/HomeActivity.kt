@@ -12,8 +12,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.hujiang.permissiondispatcher.NeedPermission
 import com.hut.reoger.doc.R
-import com.hut.reoger.doc.R.id.drawer_layout
-import com.hut.reoger.doc.R.id.nav_view
 import com.hut.reoger.doc.about.view.AboutActivity
 import com.hut.reoger.doc.feedback.view.FeedBackActivity
 import com.hut.reoger.doc.read.view.DocumentReaderActivity
@@ -24,11 +22,12 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import kotlinx.android.synthetic.main.activity_content.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import com.hut.reoger.doc.home.testActivity
+import com.hut.reoger.doc.home.view.fragment.DocumentFragment
+import com.hut.reoger.doc.home.view.fragment.HomeFragment
+import com.hut.reoger.doc.home.view.fragment.ToolsFragment
 import com.hut.reoger.doc.utils.aop.log.AspectLogUtils
 import com.hut.reoger.doc.utils.aop.networkState.AspectNetworkAnnotation
 import com.hut.reoger.doc.utils.aop.permission.AspectPermissionAnnotation
-import com.hut.reoger.doc.utils.aop.testAspect.JustTest
 
 
 /**
