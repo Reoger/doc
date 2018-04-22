@@ -1,44 +1,35 @@
 package com.hut.reoger.doc.tool.view.fragment
 
+import android.content.Context
+import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.base.BaseFragment
-import com.mylhyl.zxing.scanner.ScannerView
 
 /**
- * Created by reoger on 2018/4/18.
+ * Created by reoger on 2018/4/22.
  */
-class ResultScanningFragment : BaseFragment() {
+class ResultScanningFragment :BaseFragment(){
 
-    companion object {
-        fun getInstance(): ResultScanningFragment {
-            return InnerClass.INSTANCE
-        }
+    var content:String ?=null
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        val bundle:Bundle = arguments
+        content = bundle.getString("key","")
     }
-
-    object InnerClass {
-        val INSTANCE = ResultScanningFragment()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
-
-    private var mScannerView: ScannerView? = null
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_sacnning
+        return R.layout.fragment_result_scanning
     }
 
     override fun initView(mRootView: View) {
-        mScannerView = mRootView.findViewById(R.id.scanner_view)
-
-    }
-
-    override fun onResume() {
-        mScannerView?.onResume()
-        super.onResume()
-    }
-
-    override fun onPause() {
-        mScannerView?.onPause()
-        super.onPause()
+       val tv = mRootView.findViewById<TextView>(R.id.tv_result_scanning)
+        tv.text = content
     }
 
 }

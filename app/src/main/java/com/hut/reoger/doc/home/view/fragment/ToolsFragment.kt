@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.base.BaseFragment
+import com.hut.reoger.doc.base.LoadingPopuWindow
 import com.hut.reoger.doc.home.adapter.ToolAdapter
 import com.hut.reoger.doc.home.model.ToolBean
 import com.hut.reoger.doc.search.adapter.ItemClickSupport
@@ -39,9 +40,18 @@ class ToolsFragment : BaseFragment() {
         recyclerView.layoutManager = manager
         toolAdapter.initData(initData())
 
+        val login = LoadingPopuWindow(recyclerView)
         ItemClickSupport.addTo(recyclerView).setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
             override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
                 toast("点击了这里$position")
+                when(position){
+                    0->{
+                        login.show()
+                    }
+                    3->{
+                        login.dismiss()
+                    }
+                }
                 if(position == 1){
                     openActivity(ScanningActivity::class.java)
                 }
@@ -51,7 +61,7 @@ class ToolsFragment : BaseFragment() {
     }
 
     private fun initData(): List<ToolBean> {
-        return listOf(ToolBean("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3217764537,3208946253&fm=27&gp=0.jpg", "测试1"),
+        return listOf(ToolBean("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3217764537,3208946253&fm=27&gp=0.jpg", "二维码扫描"),
                 ToolBean("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3382991775,1398157683&fm=27&gp=0.jpg", "测试2"), ToolBean("", "测试"),
                 ToolBean("", "测试"), ToolBean("", "测试"))
     }
