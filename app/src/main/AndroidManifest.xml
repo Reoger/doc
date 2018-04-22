@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hut.reoger.doc">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -25,28 +25,32 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".home.view.HomeActivity"/>
-        <activity android:name=".user.view.LoginActivity"/>
-        <activity android:name=".read.view.DocumentReaderActivity"/>
+        <activity android:name=".home.view.HomeActivity" />
+        <activity android:name=".user.view.LoginActivity" />
+        <activity android:name=".read.view.DocumentReaderActivity" />
 
-        <activity android:name=".feedback.view.FeedBackActivity"/>
-        <activity android:name=".settings.view.SettingsActivity"/>
-        <activity android:name=".search.view.SearchResultActivity"/>
+        <activity android:name=".feedback.view.FeedBackActivity" />
+        <activity android:name=".settings.view.SettingsActivity" />
+        <activity android:name=".search.view.SearchResultActivity" />
 
-        <service android:name=".utils.downloader.service.DownloadService"/>
+        <service android:name=".utils.downloader.service.DownloadService" />
 
-        <activity android:name=".uploader.view.UploaderActivity"/>
+        <activity android:name=".uploader.view.UploaderActivity" />
 
-        <activity android:name=".about.view.AboutActivity"
+        <activity
+            android:name=".about.view.AboutActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".home.view.MarkDocActivity"/>
+        <activity android:name=".home.view.MarkDocActivity" />
 
-        <activity android:name=".home.view.CommentActivity"/>
+        <activity android:name=".home.view.CommentActivity" />
 
-        <activity android:name=".tool.view.ScanningActivity"/>
+        <activity android:name=".tool.view.ScanningActivity" />
 
-        <activity android:name=".home.testActivity"/>
+        <activity android:name=".home.testActivity" />
+
+
+        <activity android:name=".tool.view.TextToImageActivity" />
 
     </application>
 

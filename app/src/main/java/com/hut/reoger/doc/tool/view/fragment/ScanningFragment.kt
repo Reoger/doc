@@ -12,6 +12,7 @@ import com.mylhyl.zxing.scanner.ScannerView
 
 /**
  * Created by reoger on 2018/4/18.
+ *
  */
 class ScanningFragment : BaseFragment() {
 
