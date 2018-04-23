@@ -47,6 +47,9 @@
 
         <activity android:name=".tool.view.ScanningActivity" />
 
+
+        <activity android:name=".tool.view.TextToQRCodeActivity"/>
+
         <activity android:name=".home.testActivity" />
 
 

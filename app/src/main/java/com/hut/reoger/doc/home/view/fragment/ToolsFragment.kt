@@ -11,6 +11,7 @@ import com.hut.reoger.doc.home.model.ToolBean
 import com.hut.reoger.doc.search.adapter.ItemClickSupport
 import com.hut.reoger.doc.tool.view.ScanningActivity
 import com.hut.reoger.doc.tool.view.TextToImageActivity
+import com.hut.reoger.doc.tool.view.TextToQRCodeActivity
 
 /**
  * Created by CM on 2018/2/1.
@@ -50,7 +51,7 @@ class ToolsFragment : BaseFragment() {
                        openActivity(TextToImageActivity::class.java)
                     }
                     3->{
-                        login.dismiss()
+                       openActivity(TextToQRCodeActivity::class.java)
                     }
                 }
                 if(position == 1){
@@ -63,7 +64,7 @@ class ToolsFragment : BaseFragment() {
 
     private fun initData(): List<ToolBean> {
         return listOf(ToolBean("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3217764537,3208946253&fm=27&gp=0.jpg", "文字转图片"),
-                ToolBean("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3382991775,1398157683&fm=27&gp=0.jpg", "二维码扫描"), ToolBean("", "测试"),
+                ToolBean("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3382991775,1398157683&fm=27&gp=0.jpg", "二维码扫描"), ToolBean("http://ku.90sjimg.com/element_origin_min_pic/17/05/16/46dd04adc424abb7cd8c4bca9d0980e4.jpg", "测试"),
                 ToolBean("", "测试"), ToolBean("", "测试"))
     }
 
