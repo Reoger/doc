@@ -217,7 +217,6 @@ class HomeActivity : RxAppCompatActivity(), NavigationView.OnNavigationItemSelec
                 }
             }
 
-
         }
         beginTransaction.commit()
 

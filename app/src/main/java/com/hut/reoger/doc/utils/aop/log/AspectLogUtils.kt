@@ -1,3 +1,4 @@
+@file:JvmName("Greeter")
 package com.hut.reoger.doc.utils.aop.log
 
 

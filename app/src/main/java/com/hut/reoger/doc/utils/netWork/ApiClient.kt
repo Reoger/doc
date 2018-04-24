@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiClient  private constructor(){
 
 
-    lateinit var service: GitHubService
+    lateinit var service: ApiUrl
 
     private object Holder {
         val INSTANCE = ApiClient()
@@ -22,7 +22,9 @@ class ApiClient  private constructor(){
 
     companion object {
         val instance by lazy { Holder.INSTANCE }
-        val UPLOADER_FULE_URL = "www.baidu.com"
+        const val UPLOADER_FULE_URL = "www.baidu.com" //上传服务器的url
+        const val BASE_URL_DOC = "http://10.12.198.129/"
+        const val BASE_URL_USER = "http://10.12.198.106/"
     }
 
     fun init() {  //在Application的onCreate中调用一次即可
@@ -32,16 +34,17 @@ class ApiClient  private constructor(){
                         if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
                         else HttpLoggingInterceptor.Level.NONE
                 ))
+                .addInterceptor(MultipleBaseUrlInterceptor())
                 .build()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://10.12.198.129/")
+                .baseUrl(BASE_URL_DOC)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build()
 
-        service = retrofit.create(GitHubService::class.java)
+        service = retrofit.create(ApiUrl::class.java)
     }
 
 }
