@@ -2,7 +2,11 @@ package com.hut.reoger.doc
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
+import android.support.multidex.MultiDex
 import com.firefly1126.permissionaspect.PermissionCheckSDK
+import com.hut.reoger.doc.user.model.LoginData
+import com.hut.reoger.doc.user.model.LoginInfo
 import com.hut.reoger.doc.utils.exception.ExceptionHandler
 import com.hut.reoger.doc.utils.loadingUtils.SlidingInAndOutDialogFragment
 import com.hut.reoger.doc.utils.netWork.ApiClient
@@ -25,10 +29,15 @@ class App : Application() {
         PermissionCheckSDK.init(this@App)
     }
 
-    var user: String? = null
     var passWord: String? = null
     var token: String = "e463af6bafc9538e974341bab8da2dc1"//暂时先这么写
-    var userId: String = "1"
+
+    var userInfo: LoginData? = null
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
 
     fun showDialog(context: Activity) {
         // DialogFragment.show() will take care of adding the fragment
@@ -42,7 +51,6 @@ class App : Application() {
         ft.addToBackStack(null)
 //              ft.setCustomAnimations(R.anim.fragment_slide_left_enter, 0);
 
-        // Create and show the dialog.
         val newFragment = SlidingInAndOutDialogFragment()
         newFragment.show(ft, "dialog")
     }

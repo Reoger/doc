@@ -16,7 +16,7 @@ import com.hut.reoger.doc.utils.netWork.NetworkScheduler
  */
 class CommentPresenterImpl(val context:Context, val viewPoxy:ICommentDocView) : ICommentPresenter{
     override fun deleteMarkComment(comment_id: Int,pos:Int) {
-        ApiClient.instance.service.deleteComment(App.instance.token,comment_id)
+        ApiClient.instance.service.deleteComment(App.instance.userInfo!!.token,comment_id)
                 .compose(NetworkScheduler.compose())
                 .subscribe(object : ApiResponse<ServiceReply>(context) {
                     override fun success(data: ServiceReply) {
@@ -33,7 +33,7 @@ class CommentPresenterImpl(val context:Context, val viewPoxy:ICommentDocView) : 
     }
 
     override fun getMarkListByUsrId(use_id: String) {
-        ApiClient.instance.service.queryCommentByUserID(App.instance.token)
+        ApiClient.instance.service.queryCommentByUserID(App.instance.userInfo!!.token)
                 .compose(NetworkScheduler.compose())
                 .subscribe(object : ApiResponse<CommentsByDoc>(context) {
                     override fun success(data: CommentsByDoc) {

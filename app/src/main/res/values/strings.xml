@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyTestDemo</string>
+    <string name="app_name">点即搜</string>
     <string name="service_error">服务端错误</string>
     <string name="not_found">没有找到资源</string>
     <string name="timeout">超时</string>

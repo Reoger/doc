@@ -31,12 +31,12 @@ class UploaderPresenter(var context: Context?,var IUpview:IUploaderView) : IUplo
             return
         }
 
-        val token = Md5Tool.encode(App.instance.user+App.instance.passWord)
+        val token = Md5Tool.encode(App.instance.userInfo!!.userName+App.instance.passWord)
         val requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), file)
 
         val multipartBody = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("user", App.instance.user)
+                .addFormDataPart("user", App.instance.userInfo!!.userName)
                 .addFormDataPart("password", App.instance.passWord)
                 .addFormDataPart("token",token)
                 .addFormDataPart("type",type)

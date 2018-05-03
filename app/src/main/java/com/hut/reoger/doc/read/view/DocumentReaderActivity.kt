@@ -41,14 +41,18 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
         const val COMMENT_FRAGMENT = "comment_fragment"
         const val COMMENT_LIST_DATA = "data_for_comment_list"
 
-        const val DOC_ID  = "1234567890"
+        const val DOC_ID = "doc_id"
+        const val DOC_URL = "doc_url"
+
     }
+
     private var mReadPresenter: IDocumentReadPresenter? = null
 
 
     private var filePath: String? = null
+    private var docId: String? = null
 
-    private var commentFragment :Fragment ?=null
+    private var commentFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +68,7 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
     /**
      * 删除评论
      */
-    fun deleteCommentByDoc(doc_id:Int,pos:Int){
+    fun deleteCommentByDoc(doc_id: Int, pos: Int) {
         mReadPresenter?.deleteComment(doc_id)
         LogUtils.d("这里被fragment调用了$doc_id")
         (commentFragment as CommentListFragment).deleteCommentSuccessful(pos)
@@ -81,20 +85,19 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
     }
 
 
-
     override fun loadCommentSuccessful(data: CommentsByDoc?) {
-        if (data==null|| data.data?.isEmpty() == true){
+        if (data == null || data.data?.isEmpty() == true) {
             toast("该文档还没有人评论哦~")
-        }else{
-            if (commentFragment?.isAdded==true){
+        } else {
+            if (commentFragment?.isAdded == true) {
                 comment_list.visibility = View.VISIBLE
                 val transaction = fragmentManager.beginTransaction()
                 transaction.show(commentFragment).commit()
-            }else{
+            } else {
                 comment_list.visibility = View.VISIBLE
                 val transaction = fragmentManager.beginTransaction()
                 val bundle = Bundle()
-                bundle.putSerializable(COMMENT_LIST_DATA,data)
+                bundle.putSerializable(COMMENT_LIST_DATA, data)
                 commentFragment?.arguments = bundle
                 LogUtils.d("其实有想要加载fragment")
                 transaction.add(R.id.comment_list, commentFragment).commit()
@@ -117,9 +120,17 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
 
     override fun initView() {
         mReadPresenter = DocumentReadPresenterImple(this, this)
-        filePath = intent.getStringExtra(READ_ONLINE)
+
+        val bundle: Bundle = intent.extras
+        if (bundle !=null){
+            LogUtils.d("bumdle !=null and = $bundle")
+        }
+        filePath = bundle.getString(DOC_URL, "")
+        docId = bundle.getString(DOC_ID, "")
+
+        LogUtils.d("filePath -> $filePath ,docId -> $docId")
         if (null == filePath || "" == filePath)
-            filePath = "http://www.hrssgz.gov.cn/bgxz/sydwrybgxz/201101/P020110110748901718161.doc"
+            toast("无法查找到指定的文件")
         init()
     }
 
@@ -140,24 +151,29 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
                 R.id.menu_comment -> {
                     val diloag = CommentFragment.getInstance()
                     val bundle = Bundle()
-                    bundle.putSerializable("callback", object :IDialogFragmentCallback, Serializable {
-                        override fun response(message: String,score:Int) {
+                    bundle.putSerializable("callback", object : IDialogFragmentCallback, Serializable {
+                        override fun response(message: String, score: Int) {
                             toast(message)
                             //这里可以进行那个网络评论的实际操作
-                            mReadPresenter?.doComment(message,"admin","12345678",score)
+                            docId?.let {
+                                mReadPresenter?.doComment(message, "admin", it, score)
+                            }
                         }
                     })
                     diloag.arguments = bundle
                     diloag.show(fragmentManager, "tag")
                 }
                 R.id.menu_mark -> {
-                    if(mReadPresenter?.isCurrentDocMarked(DOC_ID)==true){
-                        toast("当前的文章没有已经被,现在取消标记")
-                        mReadPresenter?.cancelDocMarked(DOC_ID)
-                    }else{
-                        toast("当前的文章没有被标记,现在标记了")
-                        mReadPresenter?.markDoc(doc_name = "文章标题",doc_id = DOC_ID,user_id = App.instance.userId)
+                    docId?.apply {
+                        if (mReadPresenter?.isCurrentDocMarked(this) == true) {
+                            toast("当前的文章没有已经被,现在取消标记")
+                            mReadPresenter?.cancelDocMarked(this)
+                        } else {
+                            toast("当前的文章没有被标记,现在标记了")
+                            mReadPresenter?.markDoc(doc_name = "文章标题", doc_id = this, user_id = App.instance.userInfo!!.userId)
+                        }
                     }
+
                 }
                 R.id.menu_about -> {
                     testAopNetWork()
@@ -169,12 +185,12 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
 
                 }
                 R.id.menu_show_comment -> {
-                    if(commentFragment?.isAdded==true){
+                    if (commentFragment?.isAdded == true) {
                         LogUtils.d("fragment已经添加，")
                         comment_list.visibility = View.VISIBLE
                         val transaction = fragmentManager.beginTransaction()
                         transaction.show(commentFragment).commit()
-                    }else{
+                    } else {
                         mReadPresenter?.loadComments("12345678")
                     }
 
@@ -189,7 +205,7 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
     }
 
     @AspectNetworkAnnotation()
-    fun testAopNetWork(){
+    fun testAopNetWork() {
         toast("测试网络状态")
     }
 
@@ -226,23 +242,23 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
-        commentFragment = fragmentManager.getFragment(savedInstanceState,COMMENT_FRAGMENT) as CommentListFragment
+        commentFragment = fragmentManager.getFragment(savedInstanceState, COMMENT_FRAGMENT) as CommentListFragment
 
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        if (commentFragment?.isAdded == true){
-            fragmentManager.putFragment(outState,COMMENT_FRAGMENT, commentFragment)
+        if (commentFragment?.isAdded == true) {
+            fragmentManager.putFragment(outState, COMMENT_FRAGMENT, commentFragment)
         }//避免出现异常
     }
 
     override fun onBackPressed() {
-        if (commentFragment?.isAdded == true){
+        if (commentFragment?.isAdded == true) {
             val transaction = fragmentManager.beginTransaction()
             transaction.hide(commentFragment).commit()
             comment_list.visibility = View.GONE
-        }else{
+        } else {
             super.onBackPressed()
         }
 

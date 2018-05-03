@@ -55,7 +55,7 @@ class CommentAdapter(val mContext:Context) :RecyclerView.Adapter<CommentAdapter.
             holder.title?.text = item.commentContent
             holder.author?.text = item.commentUserName
             holder.time?.text = item.commentTime
-            if (item.commentUserId== App.instance.userId){
+            if (item.commentUserId== App.instance.userInfo?.userId){
                 holder.delete?.visibility = View.VISIBLE
                 holder.delete?.setOnClickListener({
                     if (this.listener != null)

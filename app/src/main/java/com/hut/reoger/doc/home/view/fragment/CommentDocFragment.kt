@@ -46,7 +46,7 @@ class CommentDocFragment : BaseFragment(), ICommentDocView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter = CommentPresenterImpl(activity, this)
-        presenter?.getMarkListByUsrId(App.instance.token)
+        App.instance.userInfo?.let {   presenter?.getMarkListByUsrId(it.token )}
     }
 
 

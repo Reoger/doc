@@ -29,7 +29,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="OverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow">
-        <item name="android:src">@mipmap/ic_launcher</item>
+
     </style>
 
     <style name="loading_dialog" parent="android:style/Theme.Dialog">
@@ -56,7 +56,6 @@
         <item name="android:windowEnterAnimation">@anim/dialog_anim_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_anim_out</item>
     </style>
-
 
 
     <style name="myPreferenceScreen" parent="PreferenceThemeOverlay.v14.Material">

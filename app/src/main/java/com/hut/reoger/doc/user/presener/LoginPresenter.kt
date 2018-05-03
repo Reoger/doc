@@ -1,12 +1,11 @@
 package com.hut.reoger.doc.user.presener
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import com.hut.reoger.doc.App
 import com.hut.reoger.doc.user.Constance
-import com.hut.reoger.doc.user.view.ILoginView
 import com.hut.reoger.doc.user.model.LoginInfo
+import com.hut.reoger.doc.user.view.ILoginView
 import com.hut.reoger.doc.utils.netWork.ApiClient
 import com.hut.reoger.doc.utils.netWork.ApiErrorModel
 import com.hut.reoger.doc.utils.netWork.ApiResponse
@@ -45,6 +44,7 @@ class LoginPresenter(var mContext: RxAppCompatActivity?, var longview: ILoginVie
         }
         edit.apply()
         edit.commit()
+
     }
 
 
@@ -55,8 +55,7 @@ class LoginPresenter(var mContext: RxAppCompatActivity?, var longview: ILoginVie
                 .subscribe(object : ApiResponse<LoginInfo>(mContext!!) {
                     override fun success(data: LoginInfo) {
                         longview?.apply {
-                            App.instance.user = str
-                            App.instance.passWord = password
+                            App.instance.userInfo = data.data
                             this.loginResult(1, "登录成功" + data.data.toString())
                         }
                     }

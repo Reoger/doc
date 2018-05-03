@@ -42,7 +42,7 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
      * 删除文档
      */
     override fun deleteComment(comment_id: Int) {
-        ApiClient.instance.service.deleteComment(App.instance.token, comment_id)
+        ApiClient.instance.service.deleteComment(App.instance.userInfo!!.token, comment_id)
                 .compose(NetworkScheduler.compose())
                 .bindUntilEvent(context, event = ActivityEvent.DESTROY)
                 .subscribe(object : ApiResponse<ServiceReply>(context) {
@@ -60,7 +60,11 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
     }
 
     override fun doComment(comments: String, usr: String, doc_id: String, score: Int) {
-        ApiClient.instance.service.insertComment(App.instance.token, usr, comments, score, doc_id)
+        if (App.instance.userInfo == null ){
+            //这里需要提示用户需要登录才能进行操作
+            return
+        }
+        ApiClient.instance.service.insertComment(App.instance.userInfo!!.token, usr, comments, score, doc_id)
                 .compose(NetworkScheduler.compose())
                 .bindUntilEvent(context, event = ActivityEvent.DESTROY)
                 .subscribe(object : ApiResponse<ServiceReply>(context) {
@@ -99,14 +103,18 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
         return if (isCurrentDocMarked(doc_id)) {
             false
         } else {
-            val bean = MarksBean(App.instance.userId, doc_id, doc_name, System.currentTimeMillis())
+            val bean = MarksBean(App.instance.userInfo!!.userId, doc_id, doc_name, System.currentTimeMillis())
             markDbImpl?.insertMark(bean) ?: false
         }
 
     }
 
     override fun loadComments(doc_id: String) {
-        ApiClient.instance.service.queryCommentByDocId(App.instance.token, doc_id)
+        if (App.instance.userInfo == null ){
+            LogUtils.d("提示用户登录")
+            return
+        }
+        ApiClient.instance.service.queryCommentByDocId(App.instance.userInfo!!.token, doc_id)
                 .compose(NetworkScheduler.compose())
                 .bindUntilEvent(context, event = ActivityEvent.DESTROY)
                 .subscribe(object : ApiResponse<CommentsByDoc>(context) {
@@ -219,7 +227,7 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
     private fun getCacheFile(url: String): File {
         val cacheFile = File(Environment.getExternalStorageDirectory().absolutePath + "/007/"
                 + getFileName(url))
-        TLog.d(TAG, "缓存文件 = " + cacheFile.toString())
+        LogUtils.d("缓存文件 = " + cacheFile.toString())
         return cacheFile
     }
 
@@ -264,9 +272,14 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
             TLog.d(TAG, "i <= -1")
             return str
         }
+        val j =  paramString.lastIndexOf('?')
 
+        if(j <= -1){
+            str = paramString.substring(i + 1)
+        }else{
+            str = paramString.substring(i + 1,j)
+        }
 
-        str = paramString.substring(i + 1)
         TLog.d(TAG, "paramString.substring(i + 1)------>" + str)
         return str
     }

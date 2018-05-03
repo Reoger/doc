@@ -76,6 +76,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner
 
+        multiDexEnabled true
         //X5兼容64位手机
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
@@ -142,5 +143,7 @@ dependencies {
     //二维码扫描 https://github.com/mylhyl/Android-Zxing
     implementation  'com.mylhyl:zxingscanner:2.1.1'
 
+    //multidex
+    implementation 'com.android.support:multidex:1.0.3'
 
 }

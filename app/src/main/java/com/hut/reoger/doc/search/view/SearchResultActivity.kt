@@ -20,6 +20,7 @@ import com.hut.reoger.doc.read.view.DocumentReaderActivity
 import com.hut.reoger.doc.search.adapter.ItemClickSupport
 import com.hut.reoger.doc.utils.db.HistoryDbImpl
 import com.hut.reoger.doc.utils.db.IHistoryDao
+import com.hut.reoger.doc.utils.log.LogUtils
 
 
 /**
@@ -75,9 +76,16 @@ class SearchResultActivity : BaseActivity(),ISearchResultView {
             override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
                //点击事件,测试一下
                 toast("点击事件$position")
-                val url = "http://www.hrssgz.gov.cn/bgxz/sydwrybgxz/201101/P020110110748901718161.doc"
-                IHistoryDao?.insertReadHistory(dataResult!!.hits.hits!![position])//插入数据库
-                openActivity(DocumentReaderActivity::class.java, DocumentReaderActivity.READ_ONLINE,url)
+//                val url = "http://www.hrssgz.gov.cn/bgxz/sydwrybgxz/201101/P020110110748901718161.doc"
+                val item = dataResult!!.hits.hits!![position]
+                IHistoryDao?.insertReadHistory(item)//插入数据库
+                val url = "http://"+item.Source.downLink
+                val docId = item.Id
+                val bundle = Bundle()
+                LogUtils.d("doc_id =$docId ,url = $url")
+                bundle.putString(DocumentReaderActivity.DOC_ID,docId)
+                bundle.putString(DocumentReaderActivity.DOC_URL,url)
+                openActivity(DocumentReaderActivity::class.java,bundle)
             }
         })
 

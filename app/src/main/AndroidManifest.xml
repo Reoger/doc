@@ -14,10 +14,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name=".home.view.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +24,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".home.view.HomeActivity" />
         <activity android:name=".user.view.LoginActivity" />
         <activity android:name=".read.view.DocumentReaderActivity" />
 
@@ -48,7 +46,7 @@
         <activity android:name=".tool.view.ScanningActivity" />
 
 
-        <activity android:name=".tool.view.TextToQRCodeActivity"/>
+        <activity android:name=".tool.view.TextToQRCodeActivity" />
 
         <activity android:name=".home.testActivity" />
 

@@ -36,7 +36,7 @@ class DocumentFragment : BaseFragment(){
         val floatingActionButton = view?.findViewById<FloatingActionButton>(R.id.floatingActionButton)
         floatingActionButton.setOnClickListener({
             //点击事件
-            if (App.instance.user== null ||App.instance.passWord== null){
+            if (App.instance.userInfo == null ||App.instance.passWord== null){
                 openActivity(LoginActivity::class.java)
             }else{
                 openActivity(UploaderActivity::class.java)

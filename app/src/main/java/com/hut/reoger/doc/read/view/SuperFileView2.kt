@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import com.hut.reoger.doc.utils.log.LogUtils
 import com.hut.reoger.doc.utils.log.TLog
 import com.tencent.smtt.sdk.TbsReaderView
 import java.io.File
@@ -56,7 +57,7 @@ class SuperFileView2 @JvmOverloads constructor(context: Context, attrs: Attribut
 
             //加载文件
             val localBundle = Bundle()
-            TLog.d(mFile.toString())
+            LogUtils.d(mFile.toString())
             localBundle.putString("filePath", mFile.toString())
             TLog.d("filePath.toString  =" + mFile.toString())
 
@@ -94,8 +95,14 @@ class SuperFileView2 @JvmOverloads constructor(context: Context, attrs: Attribut
             return str
         }
 
+        val j = paramString.lastIndexOf('?')
+        if (j <= -1){
+            str = paramString.substring(i + 1)
+        }else{
+            str  = paramString.substring(i+1,j);
+        }
 
-        str = paramString.substring(i + 1)
+
         Log.d(TAG, "paramString.substring(i + 1)------>" + str)
         return str
     }

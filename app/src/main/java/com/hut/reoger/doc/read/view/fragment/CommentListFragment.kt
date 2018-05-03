@@ -98,7 +98,7 @@ class CommentListFragment : BaseFragment(){
     }
 
     fun deleteComment(comment_id:Int,pos:Int){
-        ApiClient.instance.service.deleteComment(App.instance.token,comment_id)
+        ApiClient.instance.service.deleteComment(App.instance.userInfo!!.token,comment_id)
                 .compose(NetworkScheduler.compose())
                 .subscribe(object : ApiResponse<ServiceReply>(activity) {
                     override fun success(data: ServiceReply) {
