@@ -24,7 +24,7 @@ class ApiClient  private constructor(){
         val instance by lazy { Holder.INSTANCE }
         const val UPLOADER_FULE_URL = "www.baidu.com" //上传服务器的url
         const val BASE_URL_DOC = "http://172.22.66.245:9200/"
-        const val BASE_URL_USER = "http://172.31.16.23/"
+        const val BASE_URL_USER = "http://172.22.66.245/"
     }
 
     fun init() {  //在Application的onCreate中调用一次即可

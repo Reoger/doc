@@ -7,7 +7,9 @@ import com.hut.reoger.doc.user.model.RegisterData
 import com.hut.reoger.doc.user.model.RegisterInfo
 import com.hut.reoger.doc.user.presener.IRegisterPresenter
 import com.hut.reoger.doc.user.presener.RegisterPresenter
+import com.hut.reoger.doc.utils.log.LogUtils
 import com.hut.reoger.doc.utils.netWork.ApiErrorModel
+import com.hut.reoger.doc.utils.safe.Md5Tool
 import kotlinx.android.synthetic.main.activity_register.*
 
 
@@ -48,7 +50,9 @@ class RegisterActivity: BaseActivity(), IRegisterView {
         val presenter: IRegisterPresenter = RegisterPresenter(RegisterActivity@this,this)
 
         register_do.setOnClickListener({
-            val a = RegisterData(register_name.text.toString(),register_password.text.toString(),register_nickname.text.toString(),register_birthday.text.toString(),
+            val passwd = Md5Tool.hashKey(register_password.text.toString())
+            LogUtils.d("密码为passwd ${register_password.text}")
+            val a = RegisterData(register_name.text.toString(),passwd,register_nickname.text.toString(),register_birthday.text.toString(),
                     register_email.text.toString(),register_introduction.text.toString())
             presenter.doRegister(a)
         })

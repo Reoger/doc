@@ -39,6 +39,8 @@
             android:name=".about.view.AboutActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity android:name=".user.view.RegisterActivity"/>
+
         <activity android:name=".home.view.MarkDocActivity" />
 
         <activity android:name=".home.view.CommentActivity" />
