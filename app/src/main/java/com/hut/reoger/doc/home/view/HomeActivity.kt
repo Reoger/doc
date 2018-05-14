@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import com.hut.reoger.doc.home.view.fragment.DocumentFragment
 import com.hut.reoger.doc.home.view.fragment.HomeFragment
 import com.hut.reoger.doc.home.view.fragment.ToolsFragment
+import com.hut.reoger.doc.user.view.UserActivity
 import com.hut.reoger.doc.utils.aop.log.AspectLogUtils
 import com.hut.reoger.doc.utils.aop.networkState.AspectNetworkAnnotation
 import com.hut.reoger.doc.utils.aop.permission.AspectPermissionAnnotation
@@ -45,9 +46,7 @@ class HomeActivity : RxAppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_person -> {
-
-//                App.instance.showDialog(this)
-                startActivity(Intent(HomeActivity@ this, DocumentReaderActivity::class.java))
+                startActivity(Intent(HomeActivity@ this, UserActivity::class.java))
             }
             R.id.nav_history -> {
                 //历史

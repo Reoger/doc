@@ -39,6 +39,12 @@ abstract class BaseFragment : Fragment() {
         startActivity(intent)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (mRootView !=null) mRootView = null
+        if (minflater !=null) minflater = null
+    }
+
 
     @JvmOverloads
     fun openActivity(targetActivityClass: Class<*>, bundle: Bundle? = null) {

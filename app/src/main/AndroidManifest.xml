@@ -48,6 +48,8 @@
         <activity android:name=".tool.view.ScanningActivity" />
 
 
+        <activity android:name=".user.view.UserActivity"/>
+
         <activity android:name=".tool.view.TextToQRCodeActivity" />
 
         <activity android:name=".home.testActivity" />
