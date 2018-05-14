@@ -1,5 +1,6 @@
 package com.hut.reoger.doc.user.view
 
+import android.graphics.Color
 import android.os.Bundle
 
 import com.hut.reoger.doc.base.BaseActivity
