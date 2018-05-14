@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#9ce0f1">
 
     <SearchView
         android:id="@+id/fragment_home_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#456" />
+        android:background="#9ce0f1" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -24,19 +25,24 @@
             android:visibility="visible">
 
             <com.youth.banner.Banner
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="8dp"
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="140dp" />
+                android:layout_height="180dp" />
 
             <TextView
+                android:textColor="#8b8585"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:gravity="center_vertical"
                 android:text="浏览记录"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="12dp"
+                />
 
             <android.support.v7.widget.RecyclerView
-                android:background="#123"
+
                 android:id="@+id/recycler_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
