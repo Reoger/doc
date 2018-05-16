@@ -14,7 +14,6 @@ import com.hujiang.permissiondispatcher.NeedPermission
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.about.view.AboutActivity
 import com.hut.reoger.doc.feedback.view.FeedBackActivity
-import com.hut.reoger.doc.read.view.DocumentReaderActivity
 import com.hut.reoger.doc.settings.view.SettingsActivity
 import com.hut.reoger.doc.share.ShareUtils
 import com.hut.reoger.doc.utils.log.LogUtils
@@ -184,6 +183,7 @@ class HomeActivity : RxAppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
 
+    //todo  这里需要做扩展，不能做么写
     private fun choiceFragment(init: Boolean, choice: Int) {
 
         val beginTransaction = fragmentManager.beginTransaction()

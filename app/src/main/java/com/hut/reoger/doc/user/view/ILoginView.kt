@@ -5,6 +5,12 @@ package com.hut.reoger.doc.user.view
  */
 
 interface ILoginView {
-    fun loginResult(code:Int, des:String)
+    companion object {
+        val LOGIN_FILA = -1
+        val LOGIN_SUCCUSS = 1
+        val LOGIN_UNKONE = 0
+    }
+
+    fun loginResult(code:Int, des:String?)
     fun checkRememberPassWd(user:String,passwd:String)
 }

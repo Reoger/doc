@@ -1,6 +1,6 @@
 package com.hut.reoger.doc.user.view
 
-import android.graphics.Color
+
 import android.os.Bundle
 
 import com.hut.reoger.doc.base.BaseActivity
@@ -28,15 +28,17 @@ class LoginActivity : BaseActivity(), ILoginView {
 
     override fun loginResult(code: Int, des: String) {
         when (code) {
-            1 ->{
+            ILoginView.LOGIN_SUCCUSS ->{
+                toast(getString(R.string.login_success))
                 presenter?.rememberPasswd(user_remember.isChecked,edit_username.text?.toString()!!, edit_password.text?.toString()!!)
                 openActivityAndCloseThis(HomeActivity::class.java)
+//                finish()
             }
-            -1 ->{
-                log("显示登录失败" + des)
+            ILoginView.LOGIN_FILA ->{
+                toast(getString(R.string.login_fail)+des)
             }
             else ->{
-                log("未知情况")
+              toast(getString(R.string.login_unknow_error))
             }
 
         }
@@ -48,7 +50,7 @@ class LoginActivity : BaseActivity(), ILoginView {
     }
 
     override fun setActionBar() {
-        setActivityTitle("用户登录")
+        setActivityTitle(getString(R.string.user_login))
     }
 
     override fun initView() {

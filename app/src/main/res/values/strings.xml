@@ -43,8 +43,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="regitser_counter">regitser Counter</string>
 
-
-
+    <string name="user_login">用户登录</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_fail">登录失败</string>
+    <string name="login_unknow_error">登录发生位置错误</string>
 
     <!-- Example General settings -->
     <string name="pref_header_help_center">帮助中心</string>
