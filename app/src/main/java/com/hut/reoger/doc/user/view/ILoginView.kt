@@ -6,9 +6,9 @@ package com.hut.reoger.doc.user.view
 
 interface ILoginView {
     companion object {
-        val LOGIN_FILA = -1
-        val LOGIN_SUCCUSS = 1
-        val LOGIN_UNKONE = 0
+        const val LOGIN_FAIL = -1
+        const val LOGIN_SUCCESS = 1
+        const val LOGIN_UNKONE = 0
     }
 
     fun loginResult(code:Int, des:String?)

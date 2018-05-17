@@ -57,13 +57,13 @@ class LoginPresenter(var mContext: RxAppCompatActivity?, var longview: ILoginVie
                     override fun success(data: LoginInfo) {
                         longview?.apply {
                             App.instance.userInfo = data.data
-                            this.loginResult(ILoginView.LOGIN_SUCCUSS, mContext?.getString(R.string.login_success) + data.data.toString())
+                            this.loginResult(ILoginView.LOGIN_SUCCESS, mContext?.getString(R.string.login_success) + data.data.toString())
                         }
                     }
 
                     override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {
                         longview?.apply {
-                            this.loginResult(ILoginView.LOGIN_FILA, mContext?.getString(R.string.login_fail))
+                            this.loginResult(ILoginView.LOGIN_FAIL, mContext?.getString(R.string.login_fail))
                         }
                     }
                 })

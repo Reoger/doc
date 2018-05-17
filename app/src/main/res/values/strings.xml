@@ -46,7 +46,15 @@
     <string name="user_login">用户登录</string>
     <string name="login_success">登录成功</string>
     <string name="login_fail">登录失败</string>
-    <string name="login_unknow_error">登录发生位置错误</string>
+    <string name="login_unknow_error">登录发生未知错误</string>
+
+    <string name="read_activity">在线阅读界面</string>
+    <string name="comment_delete_success">评论删除成功</string>
+    <string name="comment_delete_fail">评论删除失败</string>
+    <string name="comment_no_body">该文档还没有人评论哦</string>
+    <string name="comment_success">评论成功</string>
+    <string name="comment_fail">评论失败</string>
+    <string name="can_not_find_file">无法查找到指定的文件</string>
 
     <!-- Example General settings -->
     <string name="pref_header_help_center">帮助中心</string>

@@ -62,7 +62,7 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
     }
 
     override fun setActionBar() {
-        setActivityTitle("在线阅读界面")
+        setActivityTitle(getString(R.string.read_activity))
 
     }
 
@@ -77,18 +77,18 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
 
 
     override fun deleteCommentSuccessful() {
-        toast("评论删除成功")
+        toast(getString(R.string.comment_success))
 
     }
 
     override fun deleteCommentFail(error: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        toast(getString(R.string.comment_fail))
     }
 
 
     override fun loadCommentSuccessful(data: CommentsByDoc?) {
         if (data == null || data.data?.isEmpty() == true) {
-            toast("该文档还没有人评论哦~")
+            toast(getString(R.string.comment_no_body))
         } else {
             if (commentFragment?.isAdded == true) {
                 comment_list.visibility = View.VISIBLE
@@ -107,11 +107,11 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
     }
 
     override fun commentFail(error: String) {
-        toast("评论失败$error")
+        toast(getString(R.string.comment_fail)+error)
     }
 
     override fun commentSuccessful(data: ServiceReply) {
-        toast("评论成功~")
+        toast(getString(R.string.comment_success))
     }
 
     override fun updateProgress(progress: Int) {
@@ -131,7 +131,7 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
 
         LogUtils.d("filePath -> $filePath ,docId -> $docId")
         if (null == filePath || "" == filePath)
-            toast("无法查找到指定的文件")
+            toast(getString(R.string.can_not_find_file))
         init()
     }
 
@@ -192,7 +192,8 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
                         val transaction = fragmentManager.beginTransaction()
                         transaction.show(commentFragment).commit()
                     } else {
-                        mReadPresenter?.loadComments("12345678")
+                        docId?.let { mReadPresenter?.loadComments(it) }
+
                     }
 
                 }

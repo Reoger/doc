@@ -11,7 +11,6 @@ import com.hut.reoger.doc.read.view.SuperFileView2
 import com.hut.reoger.doc.utils.db.IMarkDao
 import com.hut.reoger.doc.utils.db.MarkDbImpl
 import com.hut.reoger.doc.utils.log.LogUtils
-import com.hut.reoger.doc.utils.log.TLog
 import com.hut.reoger.doc.utils.netWork.*
 import com.hut.reoger.doc.utils.safe.Md5Tool
 import com.trello.rxlifecycle2.android.ActivityEvent
@@ -139,16 +138,21 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
         val cacheFile = getCacheFile(url)
         if (cacheFile.exists()) {
             if (cacheFile.length() <= 0) {
-                TLog.d(TAG, "删除空文件！！")
+                LogUtils.d("删除空文件！！")
                 cacheFile.delete()
                 return
             }
+            mIReadView.updateProgress(100)
+            LogUtils.d("直接返回${cacheFile.name}")
+            mSuperFileView2.displayFile(cacheFile)
+            return
+            //这里是不是可以沿用 然后直接return、
         }
 
 
         LoadFileModel.loadPdfFile(url, object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                TLog.d(TAG, "下载文件-->onResponse")
+                LogUtils.d("下载文件-->onResponse")
                 val flag: Boolean
                 var ints: InputStream? = null
                 val buf = ByteArray(2048)
@@ -162,12 +166,12 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
                     val file1 = getCacheDir(url)
                     if (!file1.exists()) {
                         file1.mkdirs()
-                        TLog.d(TAG, "创建缓存目录： " + file1.toString())
+                        LogUtils.d("创建缓存目录： " + file1.toString())
                     }
 
                     val fileN = getCacheFile(url)//new File(getCacheDir(url), getFileName(url))
 
-                    TLog.d(TAG, "创建缓存文件： " + fileN.toString())
+                    LogUtils.d("创建缓存文件： " + fileN.toString())
                     if (!fileN.exists()) {
                         val mkdir = fileN.createNewFile()
                     }
@@ -183,15 +187,15 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
                         sum += len.toLong()
                         val progress = (sum * 1.0f / total!! * 100).toInt()
                         mIReadView.updateProgress(progress)
-                        TLog.d(TAG, "写入缓存文件" + fileN.name + "进度: " + progress)
+                        LogUtils.d("写入缓存文件" + fileN.name + "进度: " + progress)
                         //这个地方可以添加进度提示
                     }
                     fos.flush()
-                    TLog.d(TAG, "文件下载成功,准备展示文件。")
+                    LogUtils.d("文件下载成功,准备展示文件。")
                     //2.ACache记录文件的有效期
                     mSuperFileView2.displayFile(fileN)
                 } catch (e: Exception) {
-                    TLog.d(TAG, "文件下载异常 = " + e.toString())
+                    LogUtils.d("文件下载异常 = " + e.toString())
                 } finally {
                     try {
                         if (ints != null)
@@ -209,7 +213,7 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                TLog.d(TAG, "文件下载失败")
+                LogUtils.d("文件下载失败")
                 val file = getCacheFile(url)
                 if (!file.exists()) {
                     file.delete()
@@ -263,13 +267,13 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
         var str = ""
 
         if (TextUtils.isEmpty(paramString)) {
-            TLog.d(TAG, "paramString---->null")
+            LogUtils.d("paramString---->null")
             return str
         }
-        TLog.d(TAG, "paramString:" + paramString)
+        LogUtils.d("paramString:" + paramString)
         val i = paramString.lastIndexOf('.')
         if (i <= -1) {
-            TLog.d(TAG, "i <= -1")
+            LogUtils.d("i <= -1")
             return str
         }
         val j =  paramString.lastIndexOf('?')
@@ -280,7 +284,7 @@ class DocumentReadPresenterImple(val context: RxAppCompatActivity, val mIReadVie
             str = paramString.substring(i + 1,j)
         }
 
-        TLog.d(TAG, "paramString.substring(i + 1)------>" + str)
+        LogUtils.d( "paramString.substring(i + 1)------>" + str)
         return str
     }
 

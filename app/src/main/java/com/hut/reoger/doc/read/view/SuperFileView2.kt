@@ -59,7 +59,7 @@ class SuperFileView2 @JvmOverloads constructor(context: Context, attrs: Attribut
             val localBundle = Bundle()
             LogUtils.d(mFile.toString())
             localBundle.putString("filePath", mFile.toString())
-            TLog.d("filePath.toString  =" + mFile.toString())
+            LogUtils.d("filePath.toString  =" + mFile.toString())
 
             localBundle.putString("tempPath", Environment.getExternalStorageDirectory().absolutePath + "/" + "TbsReaderTemp")
 
@@ -132,7 +132,6 @@ class SuperFileView2 @JvmOverloads constructor(context: Context, attrs: Attribut
     }
 
     companion object {
-
         private const val TAG = "SuperFileView"
     }
 }

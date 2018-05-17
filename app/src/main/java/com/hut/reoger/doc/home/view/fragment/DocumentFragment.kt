@@ -6,6 +6,7 @@ import android.widget.TextView
 import com.hut.reoger.doc.base.BaseFragment
 import com.hut.reoger.doc.App
 import com.hut.reoger.doc.R
+import com.hut.reoger.doc.doc.view.MyDocumentActivity
 import com.hut.reoger.doc.home.view.CommentActivity
 import com.hut.reoger.doc.home.view.MarkDocActivity
 import com.hut.reoger.doc.uploader.view.UploaderActivity
@@ -48,6 +49,10 @@ class DocumentFragment : BaseFragment(){
 
         view.findViewById<TextView>(R.id.doc_comment_tv).setOnClickListener({
             openActivity(CommentActivity::class.java)
+        })
+
+        view.findViewById<TextView>(R.id.tv_my_doc).setOnClickListener({
+            openActivity(MyDocumentActivity::class.java)
         })
     }
 }

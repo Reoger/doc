@@ -26,15 +26,15 @@ class LoginActivity : BaseActivity(), ILoginView {
     }
 
 
-    override fun loginResult(code: Int, des: String) {
+    override fun loginResult(code: Int, des: String?) {
         when (code) {
-            ILoginView.LOGIN_SUCCUSS ->{
+            ILoginView.LOGIN_SUCCESS ->{
                 toast(getString(R.string.login_success))
                 presenter?.rememberPasswd(user_remember.isChecked,edit_username.text?.toString()!!, edit_password.text?.toString()!!)
                 openActivityAndCloseThis(HomeActivity::class.java)
 //                finish()
             }
-            ILoginView.LOGIN_FILA ->{
+            ILoginView.LOGIN_FAIL ->{
                 toast(getString(R.string.login_fail)+des)
             }
             else ->{
