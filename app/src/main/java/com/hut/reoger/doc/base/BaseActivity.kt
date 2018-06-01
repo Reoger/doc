@@ -21,6 +21,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.cm.mytestdemo.utils.loadingUtils.LoadDialog
 import com.hut.reoger.doc.R
+import com.hut.reoger.doc.R.id.layout_center
 
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
@@ -54,7 +55,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
     }
 
 
-    @SuppressLint("NewApi")
+
     override fun setContentView(@LayoutRes layoutResID: Int) {
 
         if (layout_center == null && R.layout.activity_base == layoutResID) {

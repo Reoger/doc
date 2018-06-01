@@ -101,7 +101,7 @@ class SearchResultActivity : BaseActivity(),ISearchResultView {
     override fun loadSucceeful(data: ResultAsSearchBean) {
         val msg = Message()
         msg.what = SHOW_SEARCH_RESULT
-        msg.obj = "总共找到+${data.hits.total}个相关文件，相关系数最高为${data.hits.maxScore}"
+        msg.obj = "总共找到+${data.hits.total}个相关文件，相关系数最高为${data.hits.maxScore},共花费${data.timedOut}秒"
         myHandler?.sendMessage(msg)
         this.dataResult = data
         mAdapter?.setData(data.hits)

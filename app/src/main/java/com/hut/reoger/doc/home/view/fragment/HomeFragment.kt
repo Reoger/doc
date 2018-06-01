@@ -140,8 +140,15 @@ class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListe
         ItemClickSupport.addTo(listView).setOnItemClickListener(object : ItemClickSupport.OnItemClickListener {
             override fun onItemClicked(recyclerView: RecyclerView, position: Int, v: View) {
                 //点击事件,测试一下
-                val url = "http://www.hrssgz.gov.cn/bgxz/sydwrybgxz/201101/P020110110748901718161.doc"
-                openActivity(DocumentReaderActivity::class.java, DocumentReaderActivity.READ_ONLINE,url)
+//                val url = "http://www.hrssgz.gov.cn/bgxz/sydwrybgxz/201101/P020110110748901718161.doc"
+                val item = historyData!![position]
+                val url = "http://"+item.Source.downLink
+                val docId = item.Id
+                val bundle = Bundle()
+                LogUtils.d("doc_id =$docId ,url = $url")
+                bundle.putString(DocumentReaderActivity.DOC_ID,docId)
+                bundle.putString(DocumentReaderActivity.DOC_URL,url)
+                openActivity(DocumentReaderActivity::class.java, bundle)
             }
         })
 

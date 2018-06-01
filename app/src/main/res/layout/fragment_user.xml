@@ -2,14 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/test"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="10dp"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_user_user_name"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:text="用户名" />
+        android:text="@string/username" />
 
     <TextView
         android:id="@+id/tv_user_name"
@@ -17,15 +18,15 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_toRightOf="@id/tv_user_user_name"
-        android:text="124" />
+        android:text="admin" />
 
 
     <TextView
         android:layout_below="@id/tv_user_name"
         android:id="@+id/tv_user_email"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:text="邮箱" />
+        android:text="@string/email" />
 
     <TextView
         android:layout_below="@id/tv_user_name"
@@ -34,13 +35,14 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_toRightOf="@id/tv_user_user_name"
-        android:text="124" />
+        android:text="reoger112@gmail.com" />
+
+
 
     <Button
         android:id="@+id/bu_user_logout"
-        android:text="退出登录"
+        android:text="@string/logout"
         android:layout_below="@id/tv_user_email_show"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.hut.reoger.doc.base.BaseFragment
 import com.hut.reoger.doc.doc.view.DownloadDocFragment
 import com.hut.reoger.doc.doc.view.DownloadingDocFragment
+import com.hut.reoger.doc.utils.log.LogUtils
 
 
 /**
@@ -41,6 +42,7 @@ class MyDocAdapter(val mContext:Context,val fm: FragmentManager?) : FragmentPage
     }
 
     override fun getPageTitle(position: Int): CharSequence {
+        LogUtils.d("标题的内容 $position")
         when(position){
             FRAGMENT_DOWNLOADING->{
                 return "正在下载"

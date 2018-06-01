@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.text.Html
+import android.text.Html.FROM_HTML_MODE_LEGACY
+import android.text.Html.fromHtml
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -63,7 +66,7 @@ class HomeActivity : RxAppCompatActivity(), NavigationView.OnNavigationItemSelec
             }
             R.id.nav_share -> {
                 val shareUtils = ShareUtils(this)
-                shareUtils.shareText("这里是标题")
+                shareUtils.shareText(getString(R.string.share_text))
             }
             R.id.nav_feedfack -> {
                 startActivity(Intent(this, FeedBackActivity::class.java))

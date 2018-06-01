@@ -25,6 +25,13 @@ interface ApiUrl {
     @POST("userMaster/api/login.php")
     fun login(@Field("user") user: String, @Field("passwd") passwd: String): Observable<LoginInfo>
 
+
+    @Headers("url:user")
+    @FormUrlEncoded
+    @POST("userMaster/api/loginout.php")
+    fun logout(@Field("token") token: String): Observable<ServiceReply>
+
+
     @Headers("url:user")
     @FormUrlEncoded
     @POST("userMaster/api/register.php")

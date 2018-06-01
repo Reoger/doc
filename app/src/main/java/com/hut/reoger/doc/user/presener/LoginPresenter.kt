@@ -7,10 +7,7 @@ import com.hut.reoger.doc.R
 import com.hut.reoger.doc.user.Constance
 import com.hut.reoger.doc.user.model.LoginInfo
 import com.hut.reoger.doc.user.view.ILoginView
-import com.hut.reoger.doc.utils.netWork.ApiClient
-import com.hut.reoger.doc.utils.netWork.ApiErrorModel
-import com.hut.reoger.doc.utils.netWork.ApiResponse
-import com.hut.reoger.doc.utils.netWork.NetworkScheduler
+import com.hut.reoger.doc.utils.netWork.*
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
@@ -55,10 +52,17 @@ class LoginPresenter(var mContext: RxAppCompatActivity?, var longview: ILoginVie
                 .bindUntilEvent(mContext!!, event = ActivityEvent.DESTROY)
                 .subscribe(object : ApiResponse<LoginInfo>(mContext!!) {
                     override fun success(data: LoginInfo) {
-                        longview?.apply {
-                            App.instance.userInfo = data.data
-                            this.loginResult(ILoginView.LOGIN_SUCCESS, mContext?.getString(R.string.login_success) + data.data.toString())
+                        if (data.code == ResponseCode.RESULT_OK) {
+                            longview?.apply {
+                                App.instance.userInfo = data.data
+                                this.loginResult(ILoginView.LOGIN_SUCCESS, mContext?.getString(R.string.login_success) + data.data.toString())
+                            }
+                        } else {
+                            longview?.apply {
+                                this.loginResult(ILoginView.LOGIN_FAIL, mContext?.getString(R.string.login_fail))
+                            }
                         }
+
                     }
 
                     override fun failure(statusCode: Int, apiErrorModel: ApiErrorModel) {

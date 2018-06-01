@@ -35,7 +35,7 @@ class UploaderActivity : BaseActivity(),IUploaderView{
         setContentView(R.layout.activity_uploader)
     }
     override fun setActionBar() {
-        title = "上传文件"
+        setActivityTitle("文件上传")
     }
 
     override fun initView() {
@@ -57,7 +57,7 @@ class UploaderActivity : BaseActivity(),IUploaderView{
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == 1) {
+            if (requestCode == INTENT_FILE_URL) {
                 val uri = data?.data
                 tv_uploader_file_url.text = uri.toString()
             }

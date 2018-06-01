@@ -17,7 +17,7 @@ class UserActivity : BaseActivityWithMainFragment(){
         setContentView(R.layout.activity_fragment_contet)
     }
     override fun setActionBar() {
-        setActivityTitle("个人信息")
+        setActivityTitle(R.string.file_upload)
     }
 
     override fun initView() {

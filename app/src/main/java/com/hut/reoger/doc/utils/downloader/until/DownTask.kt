@@ -13,6 +13,8 @@ import com.hut.reoger.doc.utils.downloader.service.DownloadService.Companion.DOW
 import com.hut.reoger.doc.utils.downloader.bean.ThreadInfo
 import com.hut.reoger.doc.utils.downloader.db.ThreadDao
 import com.hut.reoger.doc.utils.downloader.db.ThreadDaoImple
+import com.hut.reoger.doc.utils.downloader.service.DownloadService
+import com.hut.reoger.doc.utils.log.LogUtils
 import com.hut.reoger.doc.utils.log.TLog
 import java.io.File
 import java.io.InputStream
@@ -122,16 +124,13 @@ class DownTask(context: Context, mFileInfo: FileInfo, threadCount: Int) {
                 intent.action = ACTION_UPDATE
                 //发送本地广播
 
-
 //                val intent = Intent(ACTION_UPDATE)
                 mFinished += threadInfo.finished
-                Log.e("threadInfo.getFinish==", threadInfo.finished.toString())
-
-                //                Log.e("getResponseCode ===", connection.getResponseCode() + "");
+                LogUtils.d("hreadInfo.getFinish==  ${threadInfo.finished}")
+                LogUtils.d("getResponseCode === ${connection.responseCode}")
                 //开始下载
-                if (connection.responseCode == HttpURLConnection.HTTP_PARTIAL) {
-                    Log.e("getContentLength==", connection.contentLength.toString() + "")
-
+                if (connection.responseCode == HttpURLConnection.HTTP_PARTIAL || connection.responseCode == HttpURLConnection.HTTP_OK) {
+                LogUtils.d("getContentLength==$connection.contentLength")
                     //读取数据
                     inputStream = connection.inputStream
                     val buffer = ByteArray(1024 * 4)
@@ -142,7 +141,7 @@ class DownTask(context: Context, mFileInfo: FileInfo, threadCount: Int) {
                         if (len == -1)
                             break
                         if (isPause) {
-                            Log.e("mfinished==pause===", mFinished.toString() + " 暂停了，已经运行到这里了，")
+                            LogUtils.d("mfinished==pause=== $mFinished.toString()")
                             //下载暂停时，保存进度到数据库
                             mThreadDAOMultImpe!!.updateThread(threadInfo.url, threadInfo.id,
                                     threadInfo.finished)
@@ -161,7 +160,7 @@ class DownTask(context: Context, mFileInfo: FileInfo, threadCount: Int) {
                             //把下载进度发送广播给Activity
                             intent.putExtra(BROAD_ID, mFileInfo!!.id)
                             intent.putExtra(BROAD_FINISH, mFinished * 100 / mFileInfo!!.length)
-                            TLog.d(TAG,"当前下载进度为 --> ${mFinished * 100 / mFileInfo!!.length}")
+                            LogUtils.d("前下载进度为 --> ${mFinished * 100 / mFileInfo!!.length}")
                             manager.sendBroadcast(intent)
                         }
 
@@ -196,6 +195,9 @@ class DownTask(context: Context, mFileInfo: FileInfo, threadCount: Int) {
             val intent = Intent(ACTION_FINISHED)
             intent.putExtra(BROAD_FILE_INFO, mFileInfo)
 //            mContext!!.sendBroadcast(intent)
+            DownloadService.downloadTask?.remove(mFileInfo!!)
+            DownloadService.downLoadedTask?.add(mFileInfo!!)
+            LogUtils.d("开始下载了-- ${mFileInfo.toString()}")
             LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent)
         }
     }
@@ -204,7 +206,6 @@ class DownTask(context: Context, mFileInfo: FileInfo, threadCount: Int) {
 
         var mExecutorService = Executors.newCachedThreadPool()!!
 
-        private val TAG = "DownTaskMult"
         const val BROAD_ID = "broadcast_id"
         const val BROAD_FINISH = "broadcast_finish"
         const val BROAD_FILE_INFO = "broadcast_file_info"

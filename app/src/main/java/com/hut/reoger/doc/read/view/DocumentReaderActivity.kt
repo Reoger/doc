@@ -38,7 +38,6 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
 
     companion object {
 
-        const val READ_ONLINE = "read_activity"
         const val COMMENT_FRAGMENT = "comment_fragment"
         const val COMMENT_LIST_DATA = "data_for_comment_list"
 

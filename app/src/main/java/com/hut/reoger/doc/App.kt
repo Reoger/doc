@@ -29,8 +29,6 @@ class App : Application() {
         PermissionCheckSDK.init(this@App)
     }
 
-    var passWord: String? = null
-    var token: String = "e463af6bafc9538e974341bab8da2dc1"//暂时先这么写
 
     var userInfo: LoginData? = null
 

@@ -7,10 +7,12 @@ import com.hut.reoger.doc.base.BaseFragment
 import com.hut.reoger.doc.App
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.doc.view.MyDocumentActivity
+import com.hut.reoger.doc.home.testActivity
 import com.hut.reoger.doc.home.view.CommentActivity
 import com.hut.reoger.doc.home.view.MarkDocActivity
 import com.hut.reoger.doc.uploader.view.UploaderActivity
 import com.hut.reoger.doc.user.view.LoginActivity
+import kotlinx.android.synthetic.main.fragment_document.*
 
 /**
  * Created by CM on 2018/2/1.
@@ -37,7 +39,7 @@ class DocumentFragment : BaseFragment(){
         val floatingActionButton = view?.findViewById<FloatingActionButton>(R.id.floatingActionButton)
         floatingActionButton.setOnClickListener({
             //点击事件
-            if (App.instance.userInfo == null ||App.instance.passWord== null){
+            if (App.instance.userInfo == null){
                 openActivity(LoginActivity::class.java)
             }else{
                 openActivity(UploaderActivity::class.java)
@@ -54,5 +56,10 @@ class DocumentFragment : BaseFragment(){
         view.findViewById<TextView>(R.id.tv_my_doc).setOnClickListener({
             openActivity(MyDocumentActivity::class.java)
         })
+
+        view.findViewById<TextView>(R.id.tv_my_share).setOnClickListener({
+            openActivity(testActivity::class.java)
+        })
+
     }
 }

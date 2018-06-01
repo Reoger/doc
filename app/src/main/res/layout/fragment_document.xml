@@ -44,6 +44,7 @@
         android:text="我的评论"/>
 
     <TextView
+        android:id="@+id/tv_my_share"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"

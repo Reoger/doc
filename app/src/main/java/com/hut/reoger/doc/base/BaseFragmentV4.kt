@@ -1,6 +1,7 @@
 package com.hut.reoger.doc.base
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -15,41 +16,38 @@ import android.widget.Toast
 
 abstract class BaseFragmentV4 : Fragment() {
 
-    private var mRootView: View?=null
-
-    protected var minflater: LayoutInflater?=null
+    protected var mContext: Context?=null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        mRootView = inflater.inflate(getLayoutId(),container,false)
-        minflater = inflater
-        initView(mRootView!!)
-        return mRootView!!
+       val mRootView = inflater.inflate(getLayoutId(),container,false)
+        mContext = activity
+        initView(mRootView)
+        return mRootView
     }
 
 
 
     fun toast(str: String) {
-        Toast.makeText(activity, str, Toast.LENGTH_SHORT).show()
+        Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show()
     }
 
 
 
     fun openActivity(targetActivityClass: Class<*>, targetName: String, targetMessage: String?) {
-        val intent = Intent(activity, targetActivityClass)
+        val intent = Intent(mContext, targetActivityClass)
         targetMessage?.let { intent.putExtra(targetName, targetMessage) }
         startActivity(intent)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (mRootView !=null) mRootView = null
-        if (minflater !=null) minflater = null
+        if (mContext !=null) mContext = null
     }
 
 
     @JvmOverloads
     fun openActivity(targetActivityClass: Class<*>, bundle: Bundle? = null) {
-        val intent = Intent(activity, targetActivityClass)
+        val intent = Intent(mContext, targetActivityClass)
         bundle?.let { intent.putExtras(bundle) }
         startActivity(intent)
     }

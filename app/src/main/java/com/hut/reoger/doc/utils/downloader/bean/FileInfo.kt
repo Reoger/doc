@@ -6,7 +6,7 @@ import java.io.Serializable
  * Date: 2018/3/2 18:12
  * Email: luojie@cmcm.com
  * Author: luojie
- * Description: TODO
+ * Description: 下载的信息
  */
 
 data class FileInfo(
