@@ -15,7 +15,7 @@ class TextToQRCodeActivity :BaseActivityWithMainFragment(){
         setContentView(R.layout.activity_fragment_contet)
     }
     override fun setActionBar() {
-        setActivityTitle("文字转二维码")
+        setActivityTitle(getString(R.string.Text2QRcode))
     }
 
     override fun initView() {

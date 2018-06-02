@@ -14,6 +14,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.hujiang.permissiondispatcher.NeedPermission
+import com.hut.reoger.doc.App
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.about.view.AboutActivity
 import com.hut.reoger.doc.feedback.view.FeedBackActivity
@@ -27,6 +28,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import com.hut.reoger.doc.home.view.fragment.DocumentFragment
 import com.hut.reoger.doc.home.view.fragment.HomeFragment
 import com.hut.reoger.doc.home.view.fragment.ToolsFragment
+import com.hut.reoger.doc.user.view.LoginActivity
 import com.hut.reoger.doc.user.view.UserActivity
 import com.hut.reoger.doc.utils.aop.log.AspectLogUtils
 import com.hut.reoger.doc.utils.aop.networkState.AspectNetworkAnnotation
@@ -48,7 +50,11 @@ class HomeActivity : RxAppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_person -> {
-                startActivity(Intent(HomeActivity@ this, UserActivity::class.java))
+              if (App.instance.userInfo !=null){
+                  startActivity(Intent(HomeActivity@ this, UserActivity::class.java))
+              }else{
+                  startActivity(Intent(HomeActivity@ this, LoginActivity::class.java))
+              }
             }
             R.id.nav_history -> {
                 //历史

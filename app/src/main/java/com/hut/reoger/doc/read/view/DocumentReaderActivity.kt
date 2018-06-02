@@ -15,6 +15,7 @@ import com.hut.reoger.doc.read.presenter.DocumentReadPresenterImple
 import com.hut.reoger.doc.read.presenter.IDocumentReadPresenter
 import com.hut.reoger.doc.read.view.fragment.CommentFragment
 import com.hut.reoger.doc.read.view.fragment.CommentListFragment
+import com.hut.reoger.doc.user.view.LoginActivity
 import com.hut.reoger.doc.utils.aop.networkState.AspectNetworkAnnotation
 import com.hut.reoger.doc.utils.log.LogUtils
 import com.hut.reoger.doc.utils.log.TLog
@@ -149,19 +150,13 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
         setMenu(R.menu.menu_doc, Toolbar.OnMenuItemClickListener { item: MenuItem? ->
             when (item?.itemId) {
                 R.id.menu_comment -> {
-                    val diloag = CommentFragment.getInstance()
-                    val bundle = Bundle()
-                    bundle.putSerializable("callback", object : IDialogFragmentCallback, Serializable {
-                        override fun response(message: String, score: Int) {
-                            toast(message)
-                            //这里可以进行那个网络评论的实际操作
-                            docId?.let {
-                                mReadPresenter?.doComment(message, "admin", it, score)
-                            }
-                        }
-                    })
-                    diloag.arguments = bundle
-                    diloag.show(fragmentManager, "tag")
+                    if(App.instance.userInfo != null){
+                        doComment()
+                    }else{
+                        toast(getString(R.string.user_not_login))
+                        openActivity(LoginActivity::class.java)
+                    }
+
                 }
                 R.id.menu_mark -> {
                     docId?.apply {
@@ -185,15 +180,12 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
 
                 }
                 R.id.menu_show_comment -> {
-                    if (commentFragment?.isAdded == true) {
-                        LogUtils.d("fragment已经添加，")
-                        comment_list.visibility = View.VISIBLE
-                        val transaction = fragmentManager.beginTransaction()
-                        transaction.show(commentFragment).commit()
-                    } else {
-                        docId?.let { mReadPresenter?.loadComments(it) }
-
-                    }
+                   if (App.instance.userInfo == null){
+                       toast(getString(R.string.user_not_login))
+                       openActivity(LoginActivity::class.java)
+                   }else{
+                       doShowComment()
+                   }
 
                 }
                 else -> {
@@ -203,6 +195,34 @@ class DocumentReaderActivity : BaseActivity(), IReadView {
             }
             true
         })
+    }
+
+    private fun doShowComment() {
+        if (commentFragment?.isAdded == true) {
+            LogUtils.d("fragment已经添加，")
+            comment_list.visibility = View.VISIBLE
+            val transaction = fragmentManager.beginTransaction()
+            transaction.show(commentFragment).commit()
+        } else {
+            docId?.let { mReadPresenter?.loadComments(it) }
+
+        }
+    }
+
+    private fun doComment() {
+        val diloag = CommentFragment.getInstance()
+        val bundle = Bundle()
+        bundle.putSerializable("callback", object : IDialogFragmentCallback, Serializable {
+            override fun response(message: String, score: Int) {
+                toast(message)
+                //这里可以进行那个网络评论的实际操作
+                docId?.let {
+                    mReadPresenter?.doComment(message, "admin", it, score)
+                }
+            }
+        })
+        diloag.arguments = bundle
+        diloag.show(fragmentManager, "tag")
     }
 
     @AspectNetworkAnnotation()

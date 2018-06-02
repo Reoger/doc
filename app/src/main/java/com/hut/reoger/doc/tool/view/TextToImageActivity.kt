@@ -15,7 +15,7 @@ class TextToImageActivity :BaseActivityWithMainFragment(){
         setContentView(R.layout.activity_fragment_contet)
     }
     override fun setActionBar() {
-        setActivityTitle("文字转图片")
+        setActivityTitle(getString(R.string.text2image))
     }
 
     override fun initView() {

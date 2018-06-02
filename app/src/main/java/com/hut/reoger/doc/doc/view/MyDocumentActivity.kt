@@ -16,7 +16,7 @@ class MyDocumentActivity : BaseActivity() {
     }
 
     override fun setActionBar() {
-        setActivityTitle("我的文档")
+        setActivityTitle(getString(R.string.fragment_docment))
     }
 
     override fun initView() {

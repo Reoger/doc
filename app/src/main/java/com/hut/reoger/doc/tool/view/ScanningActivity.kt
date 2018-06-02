@@ -11,7 +11,7 @@ import com.hut.reoger.doc.tool.view.fragment.ScanningFragment
  */
 class ScanningActivity : BaseActivityWithMainFragment() {
     override fun setActionBar() {
-        setActivityTitle("扫描")
+        setActivityTitle(getString(R.string.QRCode))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

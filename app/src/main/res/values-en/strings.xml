@@ -1,0 +1,152 @@
+<resources>
+    <string name="app_name">EasySearch</string>
+    <string name="service_error">Server Error</string>
+    <string name="not_found">No resources are found</string>
+    <string name="timeout">overtime</string>
+    <string name="network_wrong">network error</string>
+    <string name="unexpected_error">unknown error</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- MainActivity -->
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_document">document</string>
+    <string name="title_tool">tools</string>
+    <string name="title_activity_login">Login</string>
+    <string name="share_text">I found a particularly useful document search app，Download the connection: http://reoger.tk ，You'll try it, too.！</string>
+
+    <string name="author">author</string>
+    <string name="introduction">A brief introduction to the works</string>
+    <string name="background">background</string>
+    <string name="background_details">这里写巴拉拉 一大堆</string>
+    <string name="open_github">Open source address</string>
+    <string name="github_url">https://github.com/Reoger/doc</string>
+    <string name="about_author">About the author</string>
+    <string name="author_detail">Love to learn, love life！</string>
+    <string name="blog_address">reoger.tk</string>
+    <string name="blog_address_app">app Download Link</string>
+    <string name="blog">Blog</string>
+
+    <string name="blog_app">Blog app</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="regitser_counter">regitser Counter</string>
+
+    <string name="user_login">User login</string>
+    <string name="login_success">Login success</string>
+    <string name="login_fail">Login failure</string>
+    <string name="login_unknow_error">An unknown error in logon</string>
+
+    <string name="read_activity">Online reading interface</string>
+    <string name="comment_delete_success">Commentary deleting success</string>
+    <string name="comment_delete_fail">Review failure</string>
+    <string name="comment_no_body">The document has not been reviewed yet.</string>
+    <string name="comment_success">Comment on success</string>
+    <string name="comment_fail">Review failure</string>
+    <string name="can_not_find_file">Unable to find the specified file</string>
+
+    <!-- Example General settings -->
+    <string name="pref_header_help_center">Help center</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_account_display_name">user name</string>
+    <string name="pref_default_display_name">Default username</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_theme">Theme setting</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">notice</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="pref_header_account">account management</string>
+    <string name="pref_header_check_update">Check the update</string>
+    <string name="pref_header_about">About documents</string>
+    <string name="version">1.0.1</string>
+    <string name="download">download</string>
+    <string name="username">User name</string>
+    <string name="email">email</string>
+    <string name="logout">logout</string>
+    <string name="file_upload">"file upload"</string>
+    <string name="fragment_marks">My collection</string>
+    <string name="fragment_commit">My comments</string>
+    <string name="fragment_share">My share</string>
+    <string name="no_more_info">Dont collect any articles for the time being, go and collect it</string>
+    <string name="menu_person">Person</string>
+    <string name="menu_history">History</string>
+    <string name="menu_about">About</string>
+    <string name="menu_Settings">Settings</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_feedfack">FeedBack</string>
+    <string name="menu_communicate">Communicate</string>
+    <string name="user_center">User Center</string>
+
+</resources>

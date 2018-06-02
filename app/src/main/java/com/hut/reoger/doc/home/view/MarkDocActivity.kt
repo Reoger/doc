@@ -24,7 +24,7 @@ class MarkDocActivity : BaseActivity(), IMarkDocView {
     }
 
     override fun setActionBar() {
-        setActivityTitle("我的收藏")
+        setActivityTitle(getString(R.string.fragment_marks))
     }
 
     override fun initView() {

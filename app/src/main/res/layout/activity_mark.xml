@@ -13,7 +13,7 @@
     <TextView
         android:gravity="center"
         android:id="@+id/tv_mark_none"
-        android:text="暂时没有收藏任何文章，快去收集吧~"
+        android:text="@string/no_more_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"/>

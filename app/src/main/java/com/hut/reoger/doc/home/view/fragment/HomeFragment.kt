@@ -95,7 +95,7 @@ class HomeFragment : BaseFragment(),  android.widget.SearchView.OnQueryTextListe
          val a:SearchView = v.findViewById(R.id.fragment_home_search)
         a.setOnQueryTextListener(this)
         a.isSubmitButtonEnabled = true
-        a.queryHint = "查找"
+        a.queryHint = getString(R.string.search)
 
         val id = a.context.resources.getIdentifier("android:id/search_src_text", null, null)
 //        textView = a!!.findViewById(id) as TextView

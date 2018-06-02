@@ -19,7 +19,7 @@ class CommentActivity : BaseActivityWithMainFragment(){
 
 
     override fun setActionBar() {
-        setActivityTitle("我的评论")
+        setActivityTitle(getString(R.string.fragment_commit))
     }
 
     override fun initView() {

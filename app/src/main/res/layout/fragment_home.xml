@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:gravity="center_vertical"
-                android:text="浏览记录"
+                android:text="@string/record_history"
                 android:layout_marginLeft="12dp"
                 />
 
@@ -61,7 +61,7 @@
                 android:layout_height="30dp"
                 android:gravity="center_vertical"
                 android:layout_marginStart="20dp"
-                android:text="热门标签"
+                android:text="@string/hot_tab"
                 android:layout_marginLeft="20dp" />
 
             <com.zhy.view.flowlayout.TagFlowLayout
@@ -71,20 +71,6 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp">
             </com.zhy.view.flowlayout.TagFlowLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center_vertical"
-                android:text="历史记录"
-                android:layout_marginLeft="20dp" />
-
-            <android.support.v7.widget.RecyclerView
-                android:background="#334"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#345"/>
-
         </LinearLayout>
 
     </FrameLayout>

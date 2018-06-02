@@ -50,12 +50,12 @@ class ToolsFragment : BaseFragment() {
                     0->{
                        openActivity(TextToImageActivity::class.java)
                     }
-                    3->{
+                    1->{
+                        openActivity(ScanningActivity::class.java)
+                    }
+                    2->{
                        openActivity(TextToQRCodeActivity::class.java)
                     }
-                }
-                if(position == 1){
-                    openActivity(ScanningActivity::class.java)
                 }
             }
 
@@ -63,9 +63,9 @@ class ToolsFragment : BaseFragment() {
     }
 
     private fun initData(): List<ToolBean> {
-        return listOf(ToolBean("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3217764537,3208946253&fm=27&gp=0.jpg", "文字转图片"),
-                ToolBean("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3382991775,1398157683&fm=27&gp=0.jpg", "二维码扫描"), ToolBean("http://ku.90sjimg.com/element_origin_min_pic/17/05/16/46dd04adc424abb7cd8c4bca9d0980e4.jpg", "测试"),
-                ToolBean("", "测试"), ToolBean("", "测试"))
+        return listOf(ToolBean("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3217764537,3208946253&fm=27&gp=0.jpg", getString(R.string.text2image)),
+                ToolBean("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3382991775,1398157683&fm=27&gp=0.jpg", getString(R.string.QRCode)),
+                ToolBean("http://ku.90sjimg.com/element_origin_min_pic/17/05/16/46dd04adc424abb7cd8c4bca9d0980e4.jpg", getString(R.string.Text2QRcode)))
     }
 
 

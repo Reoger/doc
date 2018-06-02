@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.hut.reoger.doc.R
 import com.hut.reoger.doc.base.BaseFragment
 import com.hut.reoger.doc.tool.utils.Utils
+import com.hut.reoger.doc.utils.imageUtils.ImageSave
 import com.hut.reoger.doc.utils.log.LogUtils
 import java.io.ByteArrayOutputStream
 
@@ -22,6 +23,8 @@ class TextToImageFragment : BaseFragment() {
         return R.layout.fragment_text_to_image
     }
 
+    var bitmap:Bitmap ?=null
+
     override fun initView(mRootView: View) {
         val text = mRootView.findViewById<EditText>(R.id.et_text_to_image)
         val image = mRootView.findViewById<ImageView>(R.id.iv_show_cache)
@@ -29,7 +32,7 @@ class TextToImageFragment : BaseFragment() {
 
         button.setOnClickListener({
             text.text
-            val bitmap = BitmapFactory.decodeResource(activity.resources, R.drawable.item_card_bg)
+             bitmap = BitmapFactory.decodeResource(activity.resources, R.drawable.item_card_bg)
             if (bitmap != null) {
                 val bitmapp2 = Utils.getTextBitmap(bitmap, text.text.toString(), 11)
                 val stream = ByteArrayOutputStream()
@@ -40,6 +43,10 @@ class TextToImageFragment : BaseFragment() {
                 return@setOnClickListener
             }
 
+        })
+
+        image.setOnClickListener({
+            ImageSave.saveImageToGallery(activity,bitmap)
         })
     }
 
